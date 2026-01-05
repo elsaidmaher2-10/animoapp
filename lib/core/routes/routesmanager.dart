@@ -1,6 +1,6 @@
 import 'package:animoapp/core/routes/routesname.dart';
-import 'package:animoapp/core/routes/unknownRoute.dart';
-import 'package:animoapp/feature/home/presentation/views/LoginPage.dart';
+import 'package:animoapp/core/widget/unknownRoute.dart';
+import 'package:animoapp/feature/Auth/Login/presentation/views/LoginPage.dart';
 import 'package:flutter/material.dart';
 
 abstract class RoutesManager {
