@@ -79,6 +79,9 @@ flutter:
      - family: OriginalSurfer
        fonts:
          - asset: assets/fonts/OriginalSurfer-Regular.ttf
+     - family: Otama-ep
+       fonts:
+        - asset: assets/fonts/Otama-ep.otf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
