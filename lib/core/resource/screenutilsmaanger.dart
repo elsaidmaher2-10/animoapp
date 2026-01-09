@@ -7,12 +7,16 @@ class screeutilsManager {
 
   // heigh
 
+  static double r10=10.r;
+
   static double h9 = 9.5.h;
   static double h6 = 6.h;
   static double h16 = 16.h;
+  static double h30 = 30.h;
 
   //size
   static double s11 = 11.44;
   static double s38 = 38.21.sp;
   static double s16 = 16.sp;
+  static double s10 = 10.sp;
 }
