@@ -1,11 +1,10 @@
 import 'package:animoapp/core/resource/assetvaluemanger.dart';
 import 'package:animoapp/core/resource/colormanager.dart';
+import 'package:animoapp/core/routes/routesname.dart';
 import 'package:animoapp/core/widget/customtextfromfield.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 import '../../../../../core/resource/constantsmanager.dart';
 import '../../../../../core/resource/screenutilsmaanger.dart';
 
@@ -18,7 +17,6 @@ class Loginpage extends StatefulWidget {
 
 class _LoginpageState extends State<Loginpage> {
   GlobalKey<FormFieldState> key = GlobalKey();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,7 +92,7 @@ class _LoginpageState extends State<Loginpage> {
               CustomTextfromfield(
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
-                    return "Please Enter pass";
+                    return "Please Enter password";
                   } else {
                     return null;
                   }
@@ -149,13 +147,13 @@ class _LoginpageState extends State<Loginpage> {
           text: TextSpan(
             children: [
               TextSpan(
-                text: constantManager.donthaveaccount + " ",
+                text: "${constantManager.donthaveaccount} ",
                 style: TextStyle(color: ColorManger.Lightgrey2),
               ),
               WidgetSpan(
                 child: InkWell(
                   onTap: () {
-                    print("object");
+                    Navigator.of(context).pushNamed(RouteName.register);
                   },
                   child: Text(
                     constantManager.Signup,
