@@ -22,6 +22,8 @@ class Phone extends StatelessWidget {
         ),
         SizedBox(height: screeutilsManager.h6),
         CustomTextfromfield(
+          controller: TextEditingController(),
+
           hinttext: constantManager.phonehint,
           validator: (value) {
             if (value == null || value.trim().isEmpty) {

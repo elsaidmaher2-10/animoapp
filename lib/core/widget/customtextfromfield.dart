@@ -8,19 +8,23 @@ class CustomTextfromfield extends StatelessWidget {
     this.suffix,
     this.validator,
     this.obstext = false,
+  required   this.controller
   });
   String hinttext;
   Icon? suffix;
   bool obstext;
+
+  TextEditingController controller;
   String? Function(String?)? validator;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+
+      controller: controller,
       validator: validator,
       obscureText: obstext,
       decoration: InputDecoration(
         isDense: true,
-        suffix: suffix,
         fillColor: Color(0xffF6F6F6),
         filled: true,
 

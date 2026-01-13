@@ -16,4 +16,13 @@ class constantManager {
   static const String phonehint = "Enter your Phone";
   static const String ForgetPassword = "Forget Password....?";
   static const String confirmPassword = "Confirm Password";
+  static const String PasswordRulestitle =
+      "Please add all necessary characters to create safe password.";
+  static const List<String> PasswordRules = [
+         "Minimum characters 12",
+        "One uppercase character",
+        "One lowercase character",
+        "One special character",
+        "One number",
+  ];
 }

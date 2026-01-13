@@ -70,6 +70,8 @@ class _LoginpageState extends State<Loginpage> {
               ),
               SizedBox(height: screeutilsManager.h6),
               CustomTextfromfield(
+                controller: TextEditingController(),
+
                 hinttext: constantManager.hinytextemail,
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
@@ -90,6 +92,8 @@ class _LoginpageState extends State<Loginpage> {
               ),
               SizedBox(height: screeutilsManager.h6),
               CustomTextfromfield(
+                controller: TextEditingController(),
+
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
                     return "Please Enter password";

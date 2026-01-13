@@ -21,6 +21,8 @@ class Lname extends StatelessWidget {
         ),
         SizedBox(height: screeutilsManager.h6),
         CustomTextfromfield(
+          controller: TextEditingController(),
+
           hinttext: constantManager.flnamehint,
           validator: (value) {
             if (value == null || value.trim().isEmpty) {

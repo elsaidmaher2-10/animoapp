@@ -21,6 +21,7 @@ class Password extends StatelessWidget {
         ),
         SizedBox(height: screeutilsManager.h6),
         CustomTextfromfield(
+          controller: TextEditingController(),
           validator: (value) {
             if (value == null || value.trim().isEmpty) {
               return "Please Enter password";

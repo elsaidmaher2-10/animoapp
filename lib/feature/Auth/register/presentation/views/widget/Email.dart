@@ -21,6 +21,8 @@ class Email extends StatelessWidget {
         ),
         SizedBox(height: screeutilsManager.h6),
         CustomTextfromfield(
+          controller: TextEditingController(),
+
           hinttext: constantManager.hinytextemail,
           validator: (value) {
             if (value == null || value.trim().isEmpty) {

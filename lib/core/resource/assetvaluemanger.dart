@@ -1,6 +1,7 @@
 abstract class AssetValueManager{
 
 
+  static  String uploadimage="assets/image/Subtract.png";
 
   static const String Klog="assets/image/logo.svg";
 }
