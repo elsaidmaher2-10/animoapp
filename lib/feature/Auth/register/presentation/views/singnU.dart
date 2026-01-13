@@ -1,6 +1,7 @@
 import 'package:animoapp/core/resource/assetvaluemanger.dart';
 import 'package:animoapp/core/resource/colormanager.dart';
 import 'package:animoapp/core/widget/customtextfromfield.dart';
+import 'package:animoapp/feature/Auth/register/presentation/views/HaveAccountORLogin.dart';
 import 'package:animoapp/feature/Auth/register/presentation/views/widget/Email.dart';
 import 'package:animoapp/feature/Auth/register/presentation/views/widget/Lname.dart';
 import 'package:animoapp/feature/Auth/register/presentation/views/widget/Phone.dart';
@@ -8,6 +9,7 @@ import 'package:animoapp/feature/Auth/register/presentation/views/widget/confirm
 import 'package:animoapp/feature/Auth/register/presentation/views/widget/fname.dart';
 import 'package:animoapp/feature/Auth/register/presentation/views/widget/password.dart';
 import 'package:animoapp/feature/Auth/register/presentation/views/widget/password_rules.dart';
+import 'package:animoapp/feature/Auth/register/presentation/views/widget/signupbutton.dart';
 import 'package:animoapp/feature/Auth/register/presentation/views/widget/uploadimage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -53,9 +55,9 @@ class _LoginpageState extends State<Singnup> {
                             color: ColorManger.kprimary,
                           ),
                         ),
-            
+
                         SizedBox(height: screeutilsManager.h9),
-            
+
                         Text(
                           constantManager.sinup,
                           style: TextStyle(
@@ -76,24 +78,13 @@ class _LoginpageState extends State<Singnup> {
                 Password(),
                 PasswordRules(),
                 ConfirmPassword(),
-                Uploadimage()
-                ,SizedBox(height: screeutilsManager.h30),
-                SizedBox(
-                  width: double.infinity,
-            
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: ColorManger.kprimary,
-                      foregroundColor: ColorManger.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                          screeutilsManager.r10,
-                        ),
-                      ),
-                    ),
-                    onPressed: () {},
-                    child: Text(constantManager.sinup),
-                  ),
+                Uploadimage(),
+                SizedBox(height: screeutilsManager.h30),
+                SignUPButton(),
+                HaveAccountORLogin(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                 ),
               ],
             ),
