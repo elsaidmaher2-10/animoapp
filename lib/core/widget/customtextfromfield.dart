@@ -8,7 +8,7 @@ class CustomTextfromfield extends StatelessWidget {
     this.suffix,
     this.validator,
     this.obstext = false,
-  required   this.controller
+    required this.controller,
   });
   String hinttext;
   Icon? suffix;
@@ -19,7 +19,7 @@ class CustomTextfromfield extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       controller: controller,
       validator: validator,
       obscureText: obstext,

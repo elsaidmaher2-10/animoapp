@@ -3,7 +3,6 @@ import 'package:animoapp/core/resource/colormanager.dart';
 import 'package:animoapp/core/resource/screenutilsmaanger.dart';
 import 'package:animoapp/core/routes/routesname.dart';
 import 'package:animoapp/feature/Auth/otpverifcation/presentation/view/widget/otpappbar.dart';
-import 'package:animoapp/feature/Auth/register/presentation/views/widget/confirmpassword.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -51,11 +50,9 @@ class _OtpvrificationcodeState extends State<Otpvrificationcode> {
       }
     }
   }
-
   String getOtpCode() {
     return controllers.map((e) => e.text).join();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

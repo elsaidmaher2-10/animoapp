@@ -35,7 +35,7 @@ dependencies:
   flutter_screenutil: ^5.9.3
   dio: ^5.9.0
   dotted_border: ^3.1.0 # Use the latest version
-
+  connectivity_plus: ^7.0.0
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8

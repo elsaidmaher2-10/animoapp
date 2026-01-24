@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Uploadimage extends StatelessWidget {
-  const Uploadimage({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -16,7 +14,7 @@ class Uploadimage extends StatelessWidget {
           "Upload Image For Your Profile",
           style: TextStyle(fontSize: 16.sp, color: Color(0xff505050)),
         ),
-    
+
         SizedBox(height: 8.h),
         DottedBorder(
           options: RoundedRectDottedBorderOptions(

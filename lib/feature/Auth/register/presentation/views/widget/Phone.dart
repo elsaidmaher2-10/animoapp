@@ -1,4 +1,3 @@
-
 import 'package:animoapp/core/resource/colormanager.dart';
 import 'package:animoapp/core/resource/constantsmanager.dart';
 import 'package:animoapp/core/resource/screenutilsmaanger.dart';
@@ -6,8 +5,9 @@ import 'package:animoapp/core/widget/customtextfromfield.dart';
 import 'package:flutter/material.dart';
 
 class Phone extends StatelessWidget {
-  const Phone({super.key});
-
+  Phone({super.key, required this.controller, required this.validator});
+  String? Function(String?)? validator;
+  TextEditingController controller;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -22,16 +22,10 @@ class Phone extends StatelessWidget {
         ),
         SizedBox(height: screeutilsManager.h6),
         CustomTextfromfield(
-          controller: TextEditingController(),
+          controller: controller,
 
           hinttext: constantManager.phonehint,
-          validator: (value) {
-            if (value == null || value.trim().isEmpty) {
-              return "Please  Enter your Phone";
-            } else {
-              return null;
-            }
-          },
+          validator: validator,
         ),
         SizedBox(height: screeutilsManager.h16),
       ],

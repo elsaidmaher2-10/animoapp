@@ -5,9 +5,9 @@ import 'package:animoapp/core/widget/customtextfromfield.dart';
 import 'package:flutter/material.dart';
 
 class Email extends StatelessWidget {
-  const Email({super.key});
-
-  @override
+   Email({super.key, required this.controller, required this.validator});
+  TextEditingController controller;
+  String? Function(String?)? validator;
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -21,16 +21,10 @@ class Email extends StatelessWidget {
         ),
         SizedBox(height: screeutilsManager.h6),
         CustomTextfromfield(
-          controller: TextEditingController(),
+          controller:controller,
 
           hinttext: constantManager.hinytextemail,
-          validator: (value) {
-            if (value == null || value.trim().isEmpty) {
-              return "Please Enter pass";
-            } else {
-              return null;
-            }
-          },
+          validator:validator
         ),
         SizedBox(height: screeutilsManager.h16),
       ],

@@ -5,8 +5,9 @@ import 'package:animoapp/core/widget/customtextfromfield.dart';
 import 'package:flutter/material.dart';
 
 class Fname extends StatelessWidget {
-  const Fname({super.key});
-
+  Fname({super.key, required this.controller, required this.validator});
+  TextEditingController controller;
+  String? Function(String?)? validator;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -21,16 +22,10 @@ class Fname extends StatelessWidget {
         ),
         SizedBox(height: screeutilsManager.h6),
         CustomTextfromfield(
-          controller: TextEditingController(),
+          controller: controller,
 
           hinttext: constantManager.fnamehint,
-          validator: (value) {
-            if (value == null || value.trim().isEmpty) {
-              return "Please Enter Frist name";
-            } else {
-              return null;
-            }
-          },
+          validator: validator
         ),
         SizedBox(height: screeutilsManager.h16),
       ],

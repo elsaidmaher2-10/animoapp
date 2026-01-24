@@ -28,7 +28,12 @@ abstract class RoutesManager {
         }
       case RouteName.confirmPassword:
         {
-          return MaterialPageRoute(builder: (ctx) => ConfirmPassword());
+          return MaterialPageRoute(
+            builder: (ctx) => ConfirmPassword(
+              controller: TextEditingController(),
+              validator: (String? p1) {},
+            ),
+          );
         }
       default:
         {

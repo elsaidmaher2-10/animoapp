@@ -5,8 +5,9 @@ import 'package:animoapp/core/widget/customtextfromfield.dart';
 import 'package:flutter/material.dart';
 
 class Password extends StatelessWidget {
-  const Password({super.key});
-
+  Password({super.key, required this.controller, required this.validator});
+  String? Function(String?)? validator;
+  TextEditingController controller;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -21,14 +22,8 @@ class Password extends StatelessWidget {
         ),
         SizedBox(height: screeutilsManager.h6),
         CustomTextfromfield(
-          controller: TextEditingController(),
-          validator: (value) {
-            if (value == null || value.trim().isEmpty) {
-              return "Please Enter password";
-            } else {
-              return null;
-            }
-          },
+          controller: controller,
+          validator: validator,
           obstext: true,
           hinttext: constantManager.hinytextpass,
           suffix: Icon(Icons.remove_red_eye, color: ColorManger.Lightgrey3),

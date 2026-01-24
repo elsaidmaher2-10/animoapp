@@ -43,7 +43,10 @@ class Foregetpassword extends StatelessWidget {
             ),
             SizedBox(height: 58.h),
 
-            Email(),
+            Email(
+              controller: TextEditingController(),
+              validator: (String? p1) {},
+            ),
             SizedBox(height: 151.h),
 
             SizedBox(

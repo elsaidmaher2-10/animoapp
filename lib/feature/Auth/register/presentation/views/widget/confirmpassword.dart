@@ -1,4 +1,3 @@
-
 import 'package:animoapp/core/resource/colormanager.dart';
 import 'package:animoapp/core/resource/constantsmanager.dart';
 import 'package:animoapp/core/resource/screenutilsmaanger.dart';
@@ -7,8 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ConfirmPassword extends StatelessWidget {
-  const ConfirmPassword({super.key});
-
+  ConfirmPassword({
+    super.key,
+    required this.controller,
+    required this.validator,
+  });
+  String? Function(String?)? validator;
+  TextEditingController controller;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -24,7 +28,6 @@ class ConfirmPassword extends StatelessWidget {
         SizedBox(height: screeutilsManager.h6),
         CustomTextfromfield(
           controller: TextEditingController(),
-
           validator: (value) {
             if (value == null || value.trim().isEmpty) {
               return "Please Enter confirm password";
