@@ -2,12 +2,15 @@ import 'package:animoapp/core/resource/colormanager.dart';
 import 'package:animoapp/core/resource/constantsmanager.dart';
 import 'package:animoapp/core/resource/screenutilsmaanger.dart';
 import 'package:animoapp/core/widget/customtextfromfield.dart';
+import 'package:animoapp/feature/Auth/register/presentation/manager/visblitypassword/visibleeye_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Password extends StatelessWidget {
-  Password({super.key, required this.controller, required this.validator});
-  String? Function(String?)? validator;
+  Password({super.key, required this.controller, required this.onChanged});
+
   TextEditingController controller;
+  Function(String)? onChanged;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -21,12 +24,27 @@ class Password extends StatelessWidget {
           ),
         ),
         SizedBox(height: screeutilsManager.h6),
-        CustomTextfromfield(
-          controller: controller,
-          validator: validator,
-          obstext: true,
-          hinttext: constantManager.hinytextpass,
-          suffix: Icon(Icons.remove_red_eye, color: ColorManger.Lightgrey3),
+        BlocProvider(
+          create: (BuildContext context) => VisibleeyeCubit(),
+          child: BlocBuilder<VisibleeyeCubit, bool>(
+            builder: (BuildContext context, state) {
+              return CustomTextfromfield(
+                onChanged: onChanged,
+                controller: controller,
+                obstext: state,
+                hinttext: constantManager.hinytextpass,
+                suffix: IconButton(
+                  onPressed: () {
+                    context.read<VisibleeyeCubit>().chanagevisbilitypassword();
+                  },
+                  icon: Icon(
+                    state == true ? Icons.remove_red_eye : Icons.visibility_off,
+                    color: ColorManger.Lightgrey2,
+                  ),
+                ),
+              );
+            },
+          ),
         ),
         SizedBox(height: screeutilsManager.h16),
       ],

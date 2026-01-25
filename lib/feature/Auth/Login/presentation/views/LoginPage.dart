@@ -104,9 +104,12 @@ class _LoginpageState extends State<Loginpage> {
                 },
                 obstext: true,
                 hinttext: constantManager.hinytextpass,
-                suffix: Icon(
-                  Icons.remove_red_eye,
-                  color: ColorManger.Lightgrey3,
+                suffix: IconButton(
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.remove_red_eye,
+                    color: ColorManger.Lightgrey3,
+                  ),
                 ),
               ),
 
@@ -116,7 +119,6 @@ class _LoginpageState extends State<Loginpage> {
                 child: InkWell(
                   onTap: () {
                     Navigator.pushNamed(context, RouteName.foregetpassword);
-              
                   },
                   child: Text(
                     constantManager.ForgetPassword,

@@ -9,25 +9,34 @@ class CustomTextfromfield extends StatelessWidget {
     this.validator,
     this.obstext = false,
     required this.controller,
+    this.onChanged,
   });
   String hinttext;
-  Icon? suffix;
+  IconButton? suffix;
   bool obstext;
-
+  Function(String)? onChanged;
   TextEditingController controller;
   String? Function(String?)? validator;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onChanged: onChanged,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       controller: controller,
       validator: validator,
       obscureText: obstext,
       decoration: InputDecoration(
-        isDense: true,
+        isDense: false,
+        floatingLabelAlignment: FloatingLabelAlignment.center,
+        contentPadding: EdgeInsets.only(
+          left: 2,
+          bottom: 10,
+          top: 10,
+          right: 10,
+        ),
         fillColor: Color(0xffF6F6F6),
         filled: true,
-
+        suffixIcon: suffix,
         hintText: hinttext,
         hintStyle: TextStyle(color: Color(0xff6C6C6C), fontSize: 12.sp),
         border: OutlineInputBorder(
@@ -35,6 +44,7 @@ class CustomTextfromfield extends StatelessWidget {
           borderRadius: BorderRadius.circular(10.r),
         ),
         focusedBorder: OutlineInputBorder(
+          gapPadding: 15,
           borderSide: BorderSide(color: Color(0xff04332D), width: 1),
           borderRadius: BorderRadius.circular(10.r),
         ),

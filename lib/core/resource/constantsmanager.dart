@@ -18,11 +18,11 @@ class constantManager {
   static const String confirmPassword = "Confirm Password";
   static const String PasswordRulestitle =
       "Please add all necessary characters to create safe password.";
-  static const List<String> PasswordRules = [
-         "Minimum characters 12",
-        "One uppercase character",
-        "One lowercase character",
-        "One special character",
-        "One number",
+  static List<Map<String, dynamic>> PasswordRules = [
+    {"title": "Minimum characters 12", "status": false},
+    {"title": "One uppercase character", "status": false},
+    {"title": "One lowercase character", "status": false},
+    {"title": "One special character", "status": false},
+    {"title": "One number", "status": false},
   ];
 }
