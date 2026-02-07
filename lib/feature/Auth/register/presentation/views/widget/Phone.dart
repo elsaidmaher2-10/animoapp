@@ -23,6 +23,7 @@ class Phone extends StatelessWidget {
         SizedBox(height: screeutilsManager.h6),
         CustomTextfromfield(
           controller: controller,
+          ktype: TextInputType.number,
 
           hinttext: constantManager.phonehint,
           validator: validator,

@@ -32,6 +32,7 @@ dependencies:
     sdk: flutter
   flutter_native_splash: ^2.4.7
   flutter_svg: ^2.2.3
+  get_it: ^8.3.0  # Check pub.dev for latest version
   flutter_screenutil: ^5.9.3
   dio: ^5.9.0
   dotted_border: ^3.1.0 # Use the latest version
@@ -41,6 +42,9 @@ dependencies:
   cupertino_icons: ^1.0.8
   image_picker: ^1.2.1
   flutter_bloc: ^9.1.1
+  dartz: ^0.10.1
+  modal_progress_hud_nsn: ^0.5.1
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

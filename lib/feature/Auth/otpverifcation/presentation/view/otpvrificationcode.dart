@@ -74,7 +74,8 @@ class _OtpvrificationcodeState extends State<Otpvrificationcode> {
             SizedBox(height: 58.h),
 
             Row(
-              children: List.generate(otpLength, (index) {
+              children: List.generate(otpLength, 
+              (index) {
                 return Expanded(
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 5.w),

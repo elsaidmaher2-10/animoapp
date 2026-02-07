@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HaveAccountORLogin extends StatelessWidget {
-  const HaveAccountORLogin({super.key ,required this.onPressed});
+  const HaveAccountORLogin({super.key, required this.onPressed});
   final void Function()? onPressed;
   @override
   Widget build(BuildContext context) {

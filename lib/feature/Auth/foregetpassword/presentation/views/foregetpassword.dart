@@ -2,7 +2,7 @@ import 'package:animoapp/core/resource/assetvaluemanger.dart';
 import 'package:animoapp/core/resource/colormanager.dart';
 import 'package:animoapp/core/resource/screenutilsmaanger.dart';
 import 'package:animoapp/core/routes/routesname.dart';
-import 'package:animoapp/feature/Auth/register/presentation/views/singnU.dart';
+import 'package:animoapp/feature/Auth/register/presentation/views/signupwidget.dart';
 import 'package:animoapp/feature/Auth/register/presentation/views/widget/Email.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

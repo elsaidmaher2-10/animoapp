@@ -13,8 +13,10 @@ class ConfirmPassword extends StatelessWidget {
     required this.controller,
     required this.validator,
   });
-  String? Function(String?)? validator;
-  TextEditingController controller;
+
+  final String? Function(String?)? validator;
+  final TextEditingController controller;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -28,28 +30,25 @@ class ConfirmPassword extends StatelessWidget {
           ),
         ),
         SizedBox(height: screeutilsManager.h6),
-
         BlocProvider(
-          create: (BuildContext context) => VisibleeyeCubit(),
+          create: (_) => VisibleeyeCubit(),
           child: BlocBuilder<VisibleeyeCubit, bool>(
-            builder: (BuildContext context, state) {
+            builder: (context, state) {
               return CustomTextfromfield(
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return "Please Enter confirm password";
-                  } else {
-                    return null;
-                  }
-                },
+                validator: validator,
                 controller: controller,
                 obstext: state,
                 hinttext: constantManager.hinytextpass,
                 suffix: IconButton(
                   onPressed: () {
-                    context.read<VisibleeyeCubit>().chanagevisbilitypassword();
+                    context
+                        .read<VisibleeyeCubit>()
+                        .chanagevisbilitypassword();
                   },
                   icon: Icon(
-                    state == true ? Icons.remove_red_eye : Icons.visibility_off,
+                    state
+                        ? Icons.remove_red_eye
+                        : Icons.visibility_off,
                     color: ColorManger.Lightgrey2,
                   ),
                 ),
@@ -57,7 +56,8 @@ class ConfirmPassword extends StatelessWidget {
             },
           ),
         ),
-        Padding(padding: EdgeInsets.all(2.h)),
+
+        SizedBox(height: 2.h),
       ],
     );
   }

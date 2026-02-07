@@ -1,28 +1,33 @@
 import 'package:animoapp/core/resource/colormanager.dart';
 import 'package:animoapp/core/resource/constantsmanager.dart';
 import 'package:animoapp/core/resource/screenutilsmaanger.dart';
-import 'package:animoapp/core/service/networkchecker.dart';
-import 'package:dio/dio.dart';
+import 'package:animoapp/feature/Auth/register/presentation/manager/ValidatebuttonCubit/validatebutton_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignUPButton extends StatelessWidget {
-  SignUPButton({super.key, required this.onPressed});
-  void Function()? onPressed;
+  const SignUPButton({super.key, required this.onPressed});
+  final void Function()? onPressed;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: ColorManger.kprimary,
-          foregroundColor: ColorManger.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(screeutilsManager.r10),
-          ),
-        ),
-        onPressed: onPressed,
-        child: Text(constantManager.sinup),
+      child: BlocBuilder<ValidatebuttonCubit, bool>(
+        builder: (context, state) {
+          return ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: state == true
+                  ? ColorManger.kprimary
+                  : ColorManger.Lightgrey3,
+              foregroundColor: ColorManger.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(screeutilsManager.r10),
+              ),
+            ),
+            onPressed: state == true ? onPressed : null,
+            child: Text(constantManager.sinup),
+          );
+        },
       ),
     );
   }

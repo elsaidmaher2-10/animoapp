@@ -5,7 +5,7 @@ import 'package:animoapp/core/widget/customtextfromfield.dart';
 import 'package:flutter/material.dart';
 
 class Email extends StatelessWidget {
-   Email({super.key, required this.controller, required this.validator});
+  Email({super.key, required this.controller, required this.validator});
   TextEditingController controller;
   String? Function(String?)? validator;
   Widget build(BuildContext context) {
@@ -21,10 +21,10 @@ class Email extends StatelessWidget {
         ),
         SizedBox(height: screeutilsManager.h6),
         CustomTextfromfield(
-          controller:controller,
-
+          ktype: TextInputType.emailAddress,
+          controller: controller,
           hinttext: constantManager.hinytextemail,
-          validator:validator
+          validator: validator,
         ),
         SizedBox(height: screeutilsManager.h16),
       ],

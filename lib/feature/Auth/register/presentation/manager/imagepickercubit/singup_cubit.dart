@@ -4,15 +4,16 @@ part 'singup_state.dart';
 
 class SingupCubit extends Cubit<SingupState> {
   SingupCubit() : super(SingupimageInitial());
-
-  imagepickerstate(File? file) {
-    print(state);
+  File? image;
+  void imagepickerstate(File? file) {
     if (file == null) {
+      image = null;
       emit(Singupimagedosentselected());
-      print(state);
     } else {
       emit(Singupimageselected(file));
-      print(file);
+      image = file;
     }
   }
+
+  bool get hasImage => image != null;
 }

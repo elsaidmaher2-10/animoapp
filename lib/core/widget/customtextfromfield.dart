@@ -10,9 +10,11 @@ class CustomTextfromfield extends StatelessWidget {
     this.obstext = false,
     required this.controller,
     this.onChanged,
+    this.ktype = TextInputType.text,
   });
   String hinttext;
   IconButton? suffix;
+  TextInputType ktype;
   bool obstext;
   Function(String)? onChanged;
   TextEditingController controller;
@@ -20,6 +22,7 @@ class CustomTextfromfield extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      keyboardType: ktype,
       onChanged: onChanged,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       controller: controller,

@@ -1,7 +1,6 @@
 import 'package:animoapp/core/resource/assetvaluemanger.dart';
 import 'package:animoapp/core/resource/colormanager.dart';
 import 'package:animoapp/feature/Auth/register/presentation/manager/imagepickercubit/singup_cubit.dart';
-import 'package:animoapp/feature/Auth/register/presentation/views/widget/signupbutton.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,7 +18,12 @@ class Uploadimage extends StatelessWidget {
         Widget imageWidget;
 
         if (state is Singupimageselected) {
-          imageWidget = Image.file(state.image, height: 80);
+          imageWidget = Image.file(
+            state.image,
+            height: 120,
+            width: 200.w,
+            fit: BoxFit.cover,
+          );
         } else if (state is Singupimagedosentselected) {
           imageWidget = Icon(
             Icons.upload_file,
@@ -27,7 +31,11 @@ class Uploadimage extends StatelessWidget {
             size: 40,
           );
         } else {
-          imageWidget = Image.asset(AssetValueManager.uploadimage, height: 30);
+          imageWidget = Image.asset(
+            AssetValueManager.uploadimage,
+            fit: BoxFit.fill,
+            height: 30,
+          );
         }
 
         return Container(
@@ -64,8 +72,8 @@ class Uploadimage extends StatelessWidget {
                     onTap: onTap,
                     child: Padding(
                       padding: EdgeInsets.symmetric(
-                        horizontal: 80,
-                        vertical: 67,
+                        horizontal: 20,
+                        vertical: 20,
                       ),
                       child: Column(
                         children: [

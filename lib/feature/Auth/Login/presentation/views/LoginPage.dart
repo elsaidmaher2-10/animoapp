@@ -2,7 +2,6 @@ import 'package:animoapp/core/resource/assetvaluemanger.dart';
 import 'package:animoapp/core/resource/colormanager.dart';
 import 'package:animoapp/core/routes/routesname.dart';
 import 'package:animoapp/core/widget/customtextfromfield.dart';
-import 'package:animoapp/feature/Auth/foregetpassword/presentation/views/foregetpassword.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -121,7 +120,7 @@ class _LoginpageState extends State<Loginpage> {
                     Navigator.pushNamed(context, RouteName.foregetpassword);
                   },
                   child: Text(
-                    constantManager.ForgetPassword,
+                    constantManager.forgetPassword,
                     style: TextStyle(
                       color: ColorManger.kprimary,
                       fontSize: screeutilsManager.s10,
