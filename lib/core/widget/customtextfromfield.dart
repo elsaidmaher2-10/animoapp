@@ -22,6 +22,7 @@ class CustomTextfromfield extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      enableInteractiveSelection: true,
       keyboardType: ktype,
       onChanged: onChanged,
       autovalidateMode: AutovalidateMode.onUserInteraction,

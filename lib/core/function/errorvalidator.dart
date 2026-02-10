@@ -36,6 +36,13 @@ String errorvalidator(Failuerresponse e) {
     if (msg.contains(constantManager.Nointernetconnection)) {
       errors.add(constantManager.Nointernetconnection);
     }
+
+    if (msg.contains("verfication code is required")) {
+      errors.add("verfication code is required");
+    }
+    if (msg.contains("Invalid verfication code")) {
+      errors.add("Invalid verfication code");
+    }
   });
 
   return errors.join(" - ");

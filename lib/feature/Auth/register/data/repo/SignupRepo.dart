@@ -18,7 +18,7 @@ class SignupRepo {
   Future<Either<Failuerresponse, Userresponsemodel>> signup(
     Usermodel user,
   ) async {
-    final hasInternet = await networkChecker.checkinternet();
+    final hasInternet = await Networkchecker.checkinternet();
     if (!hasInternet) {
       return left(
         Failuerresponse(error: ["No internet connection"], statusCode: 0),

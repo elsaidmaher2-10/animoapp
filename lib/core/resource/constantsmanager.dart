@@ -1,7 +1,7 @@
 class constantManager {
   // ================== App ==================
   static const String animo = "ANIMOOO";
-
+  static String screen = "screen";
   // ================== Auth ==================
   static const String logIn = "Log In";
   static const String sinup = "Sign Up";
@@ -9,6 +9,9 @@ class constantManager {
   static const String Signup = "Sign up now";
   static const String retry = "retry";
   static const String forgetPassword = "Forget Password....?";
+  static const String oTPVerfication = "OTP Verfication";
+  static const String oTp4dgit =
+      "Please enter the 4 digit code sent your phone number";
 
   // ================== Fields ==================
   static const String email = "Email";
@@ -33,14 +36,14 @@ class constantManager {
   static const String passwordrequired = "Password is required";
   static const String phonerequired = "Phone is required";
   static const String imagerequired = "Image is required";
+  static const String confirm = "Confirm";
 
   // ================== Invalid Errors (API) ==================
   static const String invalidEmail = "Invalid email";
   static const String invalidPhone = "Invalid phone";
   static const String invalidPassword =
       "Password must be at least 6 characters and include letters and numbers and special characters";
-  static const String emailAlreadyExists =
-      "Email already exists or database error";
+  static const String emailAlreadyExists = "Email already exists ";
   // ================== Password Rules ==================
   static const String passwordRulestitle =
       "Please add all necessary characters to create safe password.";
@@ -57,4 +60,8 @@ class constantManager {
   static const String photoGallery = "Photo Gallery";
   static const String camera = "Camera";
   static const String cancel = "Cancel";
+
+  static String resendcode = "Resend code";
+
+  static String resendin = "Resend in ";
 }

@@ -20,9 +20,9 @@ class Uploadimage extends StatelessWidget {
         if (state is Singupimageselected) {
           imageWidget = Image.file(
             state.image,
-            height: 120,
-            width: 200.w,
-            fit: BoxFit.cover,
+            fit: BoxFit.fill,
+            height: 300.h,
+            width: 250.w,
           );
         } else if (state is Singupimagedosentselected) {
           imageWidget = Icon(
@@ -32,9 +32,10 @@ class Uploadimage extends StatelessWidget {
           );
         } else {
           imageWidget = Image.asset(
-            AssetValueManager.uploadimage,
-            fit: BoxFit.fill,
             height: 30,
+            AssetValueManager.uploadimage,
+
+            fit: BoxFit.contain,
           );
         }
 
@@ -66,30 +67,32 @@ class Uploadimage extends StatelessWidget {
                     radius: Radius.circular(8),
                     dashPattern: [10, 5],
                     strokeWidth: 2,
-                    padding: EdgeInsets.all(16),
+                    padding: EdgeInsets.all(12.h),
                   ),
                   child: InkWell(
                     onTap: onTap,
                     child: Padding(
                       padding: EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: 20,
+                        horizontal: state is SingupimageInitial ? 64 : 0,
+                        vertical: state is SingupimageInitial ? 32 : 0,
                       ),
                       child: Column(
                         children: [
                           imageWidget,
 
-                          SizedBox(height: 16.sp),
-                          Text(
-                            "Select file",
-                            style: TextStyle(
-                              color: state is Singupimageselected
-                                  ? ColorManger.green
-                                  : state is Singupimagedosentselected
-                                  ? ColorManger.red
-                                  : ColorManger.kprimary,
-                            ),
-                          ),
+                          state is Singupimageselected
+                              ? SizedBox.shrink()
+                              : Column(
+                                  children: [
+                                    SizedBox(height: 16.sp),
+                                    Text(
+                                      "Select file",
+                                      style: TextStyle(
+                                        color: ColorManger.kprimary,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                         ],
                       ),
                     ),

@@ -39,16 +39,20 @@ class User {
     required this.phone,
     required this.id,
   });
+  @override
+  String toString() {
+    return "$email $last_name $first_name $phone $id $image_path $is_verified";
+  }
 
-  factory User.fromjson(json) {
+  factory User.fromjson(Map<String, dynamic> json) {
     return User(
-      email: json["email"],
-      first_name: json["first_name"],
-      last_name: json["last_name"],
-      image_path: json["image_path"],
-      is_verified: json["is_verified"],
-      phone: json["phone"],
-      id: json["id"],
+      email: json["email"] ?? "",
+      first_name: json["first_name"] ?? "",
+      last_name: json["last_name"] ?? "",
+      image_path: json["image_path"] ?? "",
+      is_verified: json["is_verified"]?.toString() ?? "false",
+      phone: json["phone"].toString(),
+      id: json["id"] ?? 0,
     );
   }
 }

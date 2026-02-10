@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:animoapp/core/function/passvlidatorrules.dart';
 import 'package:animoapp/core/function/sinupvalidator.dart';
+import 'package:animoapp/core/function/snackbarshowerror.dart';
 import 'package:animoapp/core/resource/colormanager.dart';
 import 'package:animoapp/core/resource/constantsmanager.dart';
 import 'package:animoapp/core/routes/routesname.dart';
@@ -92,90 +93,28 @@ class _SingnupState extends State<Singnup> {
           return BlocConsumer<SignupcontrollerCubit, SignupcontrollerState>(
             listener: (context, state) async {
               if (state is Signupcontrollerfailure) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    action:
-                        state.message == constantManager.Nointernetconnection
-                        ? SnackBarAction(
-                            label: constantManager.retry,
-                            onPressed: () {
-                              context.read<SignupcontrollerCubit>().signupfunc(
-                                usermodel!,
-                              );
-                            },
-                          )
-                        : null,
-                    duration: Duration(seconds: 5),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadiusGeometry.only(
-                        topLeft: Radius.circular(8),
-                        topRight: Radius.circular(8),
-                      ),
-                    ),
-                    backgroundColor: const Color.fromARGB(255, 232, 63, 63),
-                    dismissDirection: DismissDirection.endToStart,
-                    content: Text(
-                      state.message,
-                      style: TextStyle(
-                        color: ColorManger.white,
-                        fontSize: screeutilsManager.h16,
-                      ),
-                    ),
-                  ),
-                );
-              }
-              if (state is Signupcontrollersucess) {
-                await showDialog(
+                AppSnackBar.show(
                   context: context,
-                  barrierDismissible: false, // المستخدم ميقدرش يقفلها بالسهو
-                  builder: (context) => AlertDialog(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20), // حواف مدورة
-                    ),
-                    backgroundColor: Colors.white,
-                    title: Row(
-                      children: [
-                        Icon(
-                          Icons.check_circle_outline,
-                          color: ColorManger.kprimary,
-                        ),
-                        SizedBox(width: 10),
-                        Text(
-                          "OTP Sent",
-                          style: TextStyle(
-                            color: ColorManger.kprimary,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                          ),
-                        ),
-                      ],
-                    ),
-                    content: Text(
-                      "We have sent an OTP code to your registered email or phone.",
-                      style: TextStyle(fontSize: 16),
-                    ),
-                    actions: [
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pop(context); // تقفل الديالوج
-                        },
-                        child: Text(
-                          "OK",
-                          style: TextStyle(
-                            color: ColorManger.kprimary,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                  message: state.message,
+                  onRetry: () {},
                 );
               }
 
-              Navigator.pushNamed(context, RouteName.otpverficationc);
+              if (state is Signupcontrollersucess) {
+                Navigator.pushNamed(
+                  context,
+                  RouteName.otpverficationc,
+                  arguments: {
+                    constantManager.email: emailController.text,
+                    "screen": "signup",
+                  },
+                );
+              }
             },
             buildWhen: (previous, current) {
               return current is Signupcontrollerloading ||
+                  current is Signupcontrollersucess ||
+                  current is SignupcontrollerInitial ||
                   current is Signupcontrollerfailure;
             },
             builder: (context, state) {
@@ -243,7 +182,7 @@ class _SingnupState extends State<Singnup> {
                                   ),
 
                                   /// Confirm Password
-                                  ConfirmPassword(
+                                  ConfirmPasswordwiget(
                                     controller: confirmPasswordController,
                                     validator: confvalidator,
                                   ),
@@ -258,7 +197,8 @@ class _SingnupState extends State<Singnup> {
                                   ValueListenableBuilder<bool>(
                                     valueListenable: isFormValid,
                                     builder: (context, isValid, child) {
-                                      final cubit = context.read<SingupCubit>();
+                                      final cubit = context
+                                          .watch<SingupCubit>();
                                       return SignUPButton(
                                         onPressed: isValid && cubit.hasImage
                                             ? () async {

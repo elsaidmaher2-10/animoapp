@@ -17,8 +17,14 @@ class SignupcontrollerCubit extends Cubit<SignupcontrollerState> {
     Either<Failuerresponse, Userresponsemodel> response = await repo.signup(
       user,
     );
-    response.fold((e) {
-      return emit(Signupcontrollerfailure(message: errorvalidator(e)));
-    }, (r) => emit(Signupcontrollersucess()));
+
+    response.fold(
+      (e) {
+        return emit(Signupcontrollerfailure(message: errorvalidator(e)));
+      },
+      (r) {
+        return emit(Signupcontrollersucess());
+      },
+    );
   }
 }
