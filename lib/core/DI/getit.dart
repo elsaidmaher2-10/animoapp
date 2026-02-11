@@ -1,5 +1,6 @@
 import 'package:animoapp/core/database/remote/api/apiservice.dart';
 import 'package:animoapp/core/service/networkchecker.dart';
+import 'package:animoapp/feature/Auth/Login/data/repo/Loginrepo.dart';
 import 'package:animoapp/feature/Auth/otpverifcation/data/repo/Otpvrefication.dart';
 import 'package:animoapp/feature/Auth/register/data/repo/SignupRepo.dart';
 import 'package:dio/dio.dart';
@@ -19,4 +20,5 @@ void setupgetit() {
   getIt.registerSingleton<Otpvreficationrepo>(
     Otpvreficationrepo(getIt<Apiservice>()),
   );
+  getIt.registerSingleton<Loginrepo>(Loginrepo(getIt<Apiservice>()));
 }

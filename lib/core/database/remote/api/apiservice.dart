@@ -58,7 +58,14 @@ class Apiservice extends Apiconsumer {
   }
 
   @override
-  get({required String path, required Map queryparam}) {
-    //
+ Future get({required String path, required Map<String, dynamic> queryparam}) async {
+    {
+      try {
+        final response = await dio.get(path, queryParameters: queryparam);
+        return response.data;
+      } on DioException catch (e) {
+        throw _handleDioError(e);
+      }
+    }
   }
 }
