@@ -44,7 +44,6 @@ class Apiservice extends Apiconsumer {
           e.response?.data ?? "Server error",
           e.response?.statusCode ?? 500,
         );
-
       case DioExceptionType.cancel:
         return Serverexpctionmodel("Request was cancelled", 499);
 

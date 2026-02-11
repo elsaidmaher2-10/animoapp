@@ -8,7 +8,9 @@ class constantManager {
   static const String donthaveaccount = "Don’t have an account?";
   static const String Signup = "Sign up now";
   static const String retry = "retry";
-  static const String forgetPassword = "Forget Password....?";
+
+  static const String forgetPassword = "Forget Your Password ?";
+  static const String forgetPasswordscreen = "ForgetPassword";
   static const String oTPVerfication = "OTP Verfication";
   static const String oTp4dgit =
       "Please enter the 4 digit code sent your phone number";
@@ -64,4 +66,14 @@ class constantManager {
   static String resendcode = "Resend code";
 
   static String resendin = "Resend in ";
+
+  static String descpriptionofforgetpass =
+      "Please enter the email address associated with your account, and we'll send you OTP to reset your password.";
+
+  static String sendcode = "Send  Code";
+
+  static String newPassword = 'New Password';
+  static String createnewpass = "Create New Password";
+
+  static String submit = 'Submit';
 }

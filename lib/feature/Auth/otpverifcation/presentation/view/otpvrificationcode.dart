@@ -63,7 +63,11 @@ class _OtpvrificationcodeState extends State<Otpvrificationcode> {
         }
 
         if (state is OtpvericationcontrollerSuccess) {
-          Navigator.pushNamed(context, RouteName.login);
+          if (args["screen"] == "signup") {
+            Navigator.pushNamed(context, RouteName.login);
+          } else if (args["screen"] == constantManager.forgetPasswordscreen) {
+            Navigator.pushNamed(context, RouteName.confirmPassword);
+          }
         }
       },
       builder: (context, state) {

@@ -1,6 +1,6 @@
 import 'package:animoapp/core/routes/routesname.dart';
 import 'package:animoapp/core/widget/unknownRoute.dart';
-import 'package:animoapp/feature/Auth/Confirmpass.dart';
+import 'package:animoapp/feature/Auth/confirmpassword/presentation/view/Confirmpass.dart';
 import 'package:animoapp/feature/Auth/Login/presentation/views/LoginPage.dart';
 import 'package:animoapp/feature/Auth/foregetpassword/presentation/views/foregetpassword.dart';
 import 'package:animoapp/feature/Auth/otpverifcation/presentation/view/otpvrificationcode.dart';
@@ -38,7 +38,7 @@ abstract class RoutesManager {
         }
       case RouteName.confirmPassword:
         {
-          return MaterialPageRoute(builder: (ctx) => ConfirmPassword());
+          return MaterialPageRoute(builder: (ctx) => CreatePasswordScreen());
         }
       default:
         {

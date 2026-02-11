@@ -7,8 +7,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Password extends StatelessWidget {
-  Password({super.key, required this.controller, required this.onChanged});
-
+  Password({
+    super.key,
+    required this.controller,
+    required this.onChanged,
+    this.text = constantManager.pass,
+  });
+  String text;
   TextEditingController controller;
   Function(String)? onChanged;
   @override
@@ -17,7 +22,7 @@ class Password extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          constantManager.pass,
+          text,
           style: TextStyle(
             color: ColorManger.Lightgrey,
             fontSize: screeutilsManager.s16,
