@@ -1,4 +1,5 @@
 import 'package:animoapp/core/DI/getit.dart';
+import 'package:animoapp/core/database/local/sharedprefrence/sharedprefmanager.dart';
 import 'package:animoapp/core/routes/routesmanager.dart';
 import 'package:animoapp/feature/Auth/otpverifcation/data/repo/Otpvrefication.dart';
 import 'package:animoapp/feature/Auth/otpverifcation/presentation/manager/otpvericationcontroller/otpvericationcontroller_cubit.dart';
@@ -6,8 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   setupgetit();
+  await SharedPrefManager().init();
   runApp(const MyApp());
 }
 
