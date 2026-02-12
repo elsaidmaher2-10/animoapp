@@ -13,10 +13,6 @@ void main() async {
   setupgetit();
   bool islogin = true;
   await SharedPrefManager().init();
-
-  print("${SharedPrefManager().getString("access_token")}\n");
-  print(SharedPrefManager().getString("refresh_token"));
-
   runApp(MyApp(islogin));
 }
 
