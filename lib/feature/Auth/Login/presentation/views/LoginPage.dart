@@ -124,6 +124,7 @@ class _LoginpageState extends State<Loginpage> {
                                   Text(
                                     constantManager.animo,
                                     style: TextStyle(
+                                      fontWeight: FontWeight.w500,
                                       fontFamily: FontFamily.OriginalSurfer,
                                       fontSize: screeutilsManager.s11,
                                       color: ColorManger.kprimary,

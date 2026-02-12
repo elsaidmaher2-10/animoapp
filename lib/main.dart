@@ -12,7 +12,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setupgetit();
   await SharedPrefManager().init();
-  bool islogin = SharedPrefManager().getBool("ischeck") ?? false;
+  bool islogin = SharedPrefManager().getBool("ischeck") ?? true;
 
   runApp(MyApp(islogin));
 }
