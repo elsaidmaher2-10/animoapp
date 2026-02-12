@@ -66,7 +66,11 @@ class _OtpvrificationcodeState extends State<Otpvrificationcode> {
           if (args["screen"] == "signup") {
             Navigator.pushNamed(context, RouteName.login);
           } else if (args["screen"] == constantManager.forgetPasswordscreen) {
-            Navigator.pushNamed(context, RouteName.confirmPassword);
+            Navigator.pushNamed(
+              context,
+              RouteName.confirmPassword,
+              arguments: {constantManager.email: args[constantManager.email]},
+            );
           }
         }
       },

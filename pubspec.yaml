@@ -38,7 +38,8 @@ dependencies:
   dotted_border: ^3.1.0 # Use the latest version
   connectivity_plus: ^7.0.0
   # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
+  quickalert: ^1.1.0
+
   cupertino_icons: ^1.0.8
   image_picker: ^1.2.1
   flutter_bloc: ^9.1.1

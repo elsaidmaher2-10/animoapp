@@ -8,7 +8,7 @@ class Forgetpassworduccesresponse {
   factory Forgetpassworduccesresponse.fromjosn(json) {
     return Forgetpassworduccesresponse(
       message: json["message"],
-      statusCode: json["statusCode"],
+      statusCode: json["statusCode"] ?? 0,
     );
   }
 }

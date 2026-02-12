@@ -38,7 +38,10 @@ abstract class RoutesManager {
         }
       case RouteName.confirmPassword:
         {
-          return MaterialPageRoute(builder: (ctx) => CreatePasswordScreen());
+          return MaterialPageRoute(
+            builder: (ctx) => CreatePasswordScreen(),
+            settings: route,
+          );
         }
       default:
         {

@@ -5,4 +5,5 @@ class Apiconstant {
   static String newotpverficationcode = "/api/create_new_verfication_code";
   static String loginendpoint = "/api/login";
   static String forgetPasswordendpoint = "/api/forget_password";
+  static String createnewpassowrdAPIEndpoint = "/api/create_new_possword";
 }
