@@ -11,8 +11,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setupgetit();
-  bool islogin = true;
   await SharedPrefManager().init();
+  bool islogin = SharedPrefManager().getBool("ischeck") ?? false;
+
   runApp(MyApp(islogin));
 }
 

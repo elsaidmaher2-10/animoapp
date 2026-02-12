@@ -42,6 +42,8 @@ class _LoginpageState extends State<Loginpage> {
   bool isvalidpass = false;
   bool isvalidemail = false;
 
+  bool ischeck = false;
+
   StreamController<bool> btnController = StreamController();
   @override
   Widget build(BuildContext context) {
@@ -65,6 +67,10 @@ class _LoginpageState extends State<Loginpage> {
                 SharedPrefManager().setString(
                   "refresh_token",
                   state.response.refresh_token,
+                );
+                SharedPrefManager().setString(
+                  "access_token",
+                  state.response.access_token,
                 );
 
                 QuickAlert.show(
@@ -169,12 +175,12 @@ class _LoginpageState extends State<Loginpage> {
                             ),
                           ),
                           SizedBox(height: screeutilsManager.h6),
-                          StreamBuilder(
+                          StreamBuilder<bool>(
                             stream: streamController.stream,
                             builder:
                                 (
                                   BuildContext context,
-                                  AsyncSnapshot<dynamic> snapshot,
+                                  AsyncSnapshot<bool> snapshot,
                                 ) {
                                   return CustomTextfromfield(
                                     controller: password,
@@ -202,7 +208,9 @@ class _LoginpageState extends State<Loginpage> {
                                         isvisible();
                                       },
                                       icon: Icon(
-                                        Icons.remove_red_eye,
+                                        snapshot.data == true
+                                            ? Icons.remove_red_eye
+                                            : Icons.visibility_off,
                                         color: ColorManger.Lightgrey3,
                                       ),
                                     ),
@@ -211,23 +219,47 @@ class _LoginpageState extends State<Loginpage> {
                           ),
 
                           Padding(padding: EdgeInsets.all(2.h)),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.pushNamed(
-                                  context,
-                                  RouteName.foregetpassword,
-                                );
-                              },
-                              child: Text(
-                                constantManager.forgetPassword,
-                                style: TextStyle(
-                                  color: ColorManger.kprimary,
-                                  fontSize: screeutilsManager.s10,
+                          Row(
+                            children: [
+                              Row(
+                                children: [
+                                  ConstrainedBox(
+                                    constraints: BoxConstraints.tight(
+                                      Size(30, 30),
+                                    ),
+                                    child: Checkbox(
+                                      activeColor: ColorManger.kprimary,
+                                      value: ischeck,
+                                      onChanged: (onChanged) async {
+                                        ischeck = onChanged ?? false;
+                                        setState(() {});
+                                        await SharedPrefManager().setBool(
+                                          "ischeck",
+                                          ischeck,
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                  Text("remember me view"),
+                                ],
+                              ),
+                              Spacer(),
+                              InkWell(
+                                onTap: () {
+                                  Navigator.pushNamed(
+                                    context,
+                                    RouteName.foregetpassword,
+                                  );
+                                },
+                                child: Text(
+                                  constantManager.forgetPassword,
+                                  style: TextStyle(
+                                    color: ColorManger.kprimary,
+                                    fontSize: screeutilsManager.s10,
+                                  ),
                                 ),
                               ),
-                            ),
+                            ],
                           ),
 
                           SizedBox(height: screeutilsManager.h30),
