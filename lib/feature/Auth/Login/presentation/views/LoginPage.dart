@@ -1,6 +1,6 @@
 import 'dart:async';
-
 import 'package:animoapp/core/DI/getit.dart';
+import 'package:animoapp/core/database/local/sharedprefrence/sharedprefmanager.dart';
 import 'package:animoapp/core/function/sinupvalidator.dart';
 import 'package:animoapp/core/function/snackbarshowerror.dart';
 import 'package:animoapp/core/resource/assetvaluemanger.dart';
@@ -16,6 +16,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:quickalert/models/quickalert_type.dart';
+import 'package:quickalert/widgets/quickalert_dialog.dart';
 import '../../../../../core/resource/constantsmanager.dart';
 import '../../../../../core/resource/screenutilsmaanger.dart';
 
@@ -55,6 +57,29 @@ class _LoginpageState extends State<Loginpage> {
                   message: state.message,
                   onRetry: () {},
                 );
+              } else if (state is LogincontrollerSuccess) {
+                SharedPrefManager().setString(
+                  "access_token",
+                  state.response.access_token,
+                );
+                SharedPrefManager().setString(
+                  "refresh_token",
+                  state.response.refresh_token,
+                );
+
+                QuickAlert.show(
+                  text: state.response.message,
+                  headerBackgroundColor: ColorManger.kprimary,
+                  context: context,
+                  type: QuickAlertType.success,
+                  onConfirmBtnTap: () {
+                    Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      RouteName.home,
+                      (Route<dynamic> routes) => false,
+                    );
+                  },
+                ); //
               }
             },
             builder: (context, state) {

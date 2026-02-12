@@ -1,6 +1,7 @@
 import 'package:animoapp/core/DI/getit.dart';
 import 'package:animoapp/core/database/local/sharedprefrence/sharedprefmanager.dart';
 import 'package:animoapp/core/routes/routesmanager.dart';
+import 'package:animoapp/core/routes/routesname.dart';
 import 'package:animoapp/feature/Auth/otpverifcation/data/repo/Otpvrefication.dart';
 import 'package:animoapp/feature/Auth/otpverifcation/presentation/manager/otpvericationcontroller/otpvericationcontroller_cubit.dart';
 import 'package:flutter/material.dart';
@@ -10,13 +11,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setupgetit();
+  bool islogin = true;
   await SharedPrefManager().init();
-  runApp(const MyApp());
+
+  print("${SharedPrefManager().getString("access_token")}\n");
+  print(SharedPrefManager().getString("refresh_token"));
+
+  runApp(MyApp(islogin));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp(this.islogin, {super.key});
 
+  bool islogin;
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -32,6 +39,7 @@ class MyApp extends StatelessWidget {
             ),
           ],
           child: MaterialApp(
+            initialRoute: islogin ? RouteName.home : RouteName.login,
             debugShowCheckedModeBanner: false,
             onGenerateRoute: RoutesManager.ongenerate,
           ),

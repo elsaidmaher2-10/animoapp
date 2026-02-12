@@ -26,10 +26,11 @@ class Loginsuccesresponse {
     required this.user,
   });
   factory Loginsuccesresponse.fromjosn(json) {
+    print(json);
     return Loginsuccesresponse(
       access_token: json["access_token"],
       message: json["message"],
-      refresh_token: json["access_token"],
+      refresh_token: json["refresh_token"],
       statusCode: json["statusCode"],
       user: json["user"] == null ? null : User.fromjson(json["user"]),
     );

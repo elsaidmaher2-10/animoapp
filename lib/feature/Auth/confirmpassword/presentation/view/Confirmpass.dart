@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:animoapp/core/DI/getit.dart';
+import 'package:animoapp/core/database/local/sharedprefrence/sharedprefmanager.dart';
 import 'package:animoapp/core/database/remote/api/apiservice.dart';
 import 'package:animoapp/core/function/passvlidatorrules.dart';
 import 'package:animoapp/core/function/snackbarshowerror.dart';
@@ -89,10 +90,17 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                     onRetry: () {},
                   );
                 }
-
                 if (state is ConfirmPasswordControllerSuccess) {
+                  SharedPrefManager().setString(
+                    "access_token",
+                    state.message.accessToken,
+                  );
+                  SharedPrefManager().setString(
+                    "refresh_token",
+                    state.message.refreshToken,
+                  );
                   QuickAlert.show(
-                    text: state.message,
+                    text: state.message.message,
                     headerBackgroundColor: ColorManger.kprimary,
                     context: context,
                     type: QuickAlertType.success,

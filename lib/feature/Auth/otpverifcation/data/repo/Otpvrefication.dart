@@ -30,8 +30,17 @@ class Otpvreficationrepo {
 
       return right(OtpSuccessResponse.fromJson(response));
     } on Serverexpctionmodel catch (e) {
-      final d = Failuerresponse.fromjson(e.message as Map);
-      return left(Failuerresponse(error: d.error, statusCode: e.statuscode));
+      if (e.message is Map) {
+        final d = Failuerresponse.fromjson(e.message);
+        return left(d);
+      } else {
+        return left(
+          Failuerresponse(
+            error: [e.message.toString()],
+            statusCode: e.statuscode,
+          ),
+        );
+      }
     } catch (e) {
       return left(Failuerresponse(error: [e.toString()], statusCode: 500));
     }

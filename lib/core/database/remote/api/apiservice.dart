@@ -41,7 +41,7 @@ class Apiservice extends Apiconsumer {
 
       case DioExceptionType.badResponse:
         return Serverexpctionmodel(
-          e.response?.data ?? "Server error",
+          e.response?.data as Map? ?? "Server error",
           e.response?.statusCode ?? 500,
         );
       case DioExceptionType.cancel:
@@ -57,7 +57,10 @@ class Apiservice extends Apiconsumer {
   }
 
   @override
- Future get({required String path, required Map<String, dynamic> queryparam}) async {
+  Future get({
+    required String path,
+    required Map<String, dynamic> queryparam,
+  }) async {
     {
       try {
         final response = await dio.get(path, queryParameters: queryparam);

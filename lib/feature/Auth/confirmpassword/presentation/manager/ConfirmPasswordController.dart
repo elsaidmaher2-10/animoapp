@@ -24,7 +24,7 @@ class ConfirmPasswordController extends Cubit<ConfirmPasswordControllerState> {
     isAsync = false;
     result.fold(
       (e) => emit(ConfirmPasswordControllerFailure(message: e.error.join("-"))),
-      (r) => emit(ConfirmPasswordControllerSuccess(r.message)),
+      (r) => emit(ConfirmPasswordControllerSuccess(r)),
     );
   }
 }

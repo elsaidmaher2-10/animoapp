@@ -1,3 +1,5 @@
+import 'package:animoapp/feature/Auth/otpverifcation/data/model/otpsuccesresponse.dart';
+
 class ConfirmPasswordControllerState {}
 
 final class ConfirmPasswordControllerInitial
@@ -8,7 +10,7 @@ final class ConfirmPasswordControllerLoading
 
 final class ConfirmPasswordControllerSuccess
     extends ConfirmPasswordControllerState {
-  String message;
+  OtpSuccessResponse  message;
   ConfirmPasswordControllerSuccess(this.message);
 }
 

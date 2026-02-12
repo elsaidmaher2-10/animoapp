@@ -14,7 +14,7 @@ class LoginmangerCubit extends Cubit<LogincontrollerState> {
 
     result.fold(
       (e) => emit(LogincontrollerFailure(message: e.error.join("-"))),
-      (r) => emit(LogincontrollerSuccess()),
+      (r) => emit(LogincontrollerSuccess(r)),
     );
   }
 }

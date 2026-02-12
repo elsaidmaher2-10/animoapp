@@ -5,7 +5,6 @@ import 'package:animoapp/core/database/remote/error/serverExpctionmodel.dart';
 import 'package:animoapp/core/service/networkchecker.dart';
 import 'package:animoapp/feature/Auth/foregetpassword/data/models/foregetpasswordresponse.dart';
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
 
 class Forgepasswordrepo {
   Apiservice apiservice;
@@ -25,12 +24,15 @@ class Forgepasswordrepo {
 
       return right(Forgetpassworduccesresponse.fromjosn(response));
     } on Serverexpctionmodel catch (e) {
-      Forgetpassworderror error = Forgetpassworderror.fromjson(
-        e.message as Map,
-      );
-      return left(error);
+      if (e.message is Map) {
+        Forgetpassworderror error = Forgetpassworderror.fromjson(
+          e.message as Map,
+        );
+        return left(error);
+      } else {
+        return left(Forgetpassworderror(error: e.message.toString()));
+      }
     } catch (e) {
-
       return left(Forgetpassworderror(error: e.toString()));
     }
   }

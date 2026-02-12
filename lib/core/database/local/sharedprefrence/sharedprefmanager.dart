@@ -13,15 +13,13 @@ class SharedPrefManager {
     _prefs = await SharedPreferences.getInstance();
   }
 
-
-  Future<void> setString(String key, String value) async {
+  setString(String key, String value) async {
     await _prefs.setString(key, value);
   }
 
   Future<void> setBool(String key, bool value) async {
     await _prefs.setBool(key, value);
   }
-
 
   String? getString(String key) {
     return _prefs.getString(key);
