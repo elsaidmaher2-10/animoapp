@@ -73,8 +73,8 @@ class Uploadimage extends StatelessWidget {
                     onTap: onTap,
                     child: Padding(
                       padding: EdgeInsets.symmetric(
-                        horizontal: state is SingupimageInitial ? 64 : 0,
-                        vertical: state is SingupimageInitial ? 32 : 0,
+                        horizontal: state is SingupimageInitial ? 100 : 0,
+                        vertical: state is SingupimageInitial ? 64 : 0,
                       ),
                       child: Column(
                         children: [

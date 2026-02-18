@@ -35,7 +35,8 @@ class MyApp extends StatelessWidget {
                   OtpvericationcontrollerCubit(getIt<Otpvreficationrepo>()),
             ),
           ],
-          child: MaterialApp(
+
+                child: MaterialApp(
             initialRoute: islogin ? RouteName.home : RouteName.login,
             debugShowCheckedModeBanner: false,
             onGenerateRoute: RoutesManager.ongenerate,

@@ -11,8 +11,11 @@ class CustomTextfromfield extends StatelessWidget {
     required this.controller,
     this.onChanged,
     this.ktype = TextInputType.text,
+    this.maxlines = 1,
   });
   String hinttext;
+
+  int maxlines;
   IconButton? suffix;
   TextInputType ktype;
   bool obstext;
@@ -22,6 +25,7 @@ class CustomTextfromfield extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      maxLines: maxlines,
       enableInteractiveSelection: true,
       keyboardType: ktype,
       onChanged: onChanged,

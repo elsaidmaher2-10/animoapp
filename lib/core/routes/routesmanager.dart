@@ -6,6 +6,8 @@ import 'package:animoapp/feature/Auth/foregetpassword/presentation/views/foreget
 import 'package:animoapp/feature/Auth/otpverifcation/presentation/view/otpvrificationcode.dart';
 import 'package:animoapp/feature/Auth/register/presentation/views/signupwidget.dart';
 import 'package:animoapp/feature/home/presentation/views/home.dart';
+import 'package:animoapp/feature/home/presentation/views/mainscreen.dart';
+import 'package:animoapp/main.dart';
 import 'package:flutter/material.dart';
 
 abstract class RoutesManager {
@@ -40,7 +42,7 @@ abstract class RoutesManager {
         }
       case RouteName.home:
         {
-          return MaterialPageRoute(builder: (ctx) => Home());
+          return MaterialPageRoute(builder: (ctx) => Mainscreen());
         }
       default:
         {

@@ -13,4 +13,6 @@ class ColorManger {
   static const Color green = Color(0xff08A43A);
 
   static Color black = Color(0xff000000);
+
+  static Color klightgreen = Color(0xff16A99F);
 }

@@ -17,7 +17,10 @@ class AnimalWidget extends StatelessWidget {
       itemCount: 10,
       itemBuilder: (BuildContext context, int index) => Container(
         margin: EdgeInsets.all(17.w),
-        decoration: BoxDecoration(color: ColorManger.Lightgrey4),
+        decoration: BoxDecoration(
+          color: ColorManger.Lightgrey4,
+          borderRadius: BorderRadius.circular(8),
+        ),
         child: Column(
           children: [
             Padding(

@@ -76,4 +76,6 @@ class constantManager {
   static String createnewpass = "Create New Password";
 
   static String submit = 'Submit';
+
+  static String save = "Save";
 }
