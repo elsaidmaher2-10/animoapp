@@ -38,4 +38,6 @@ class screeutilsManager {
   static double s12 = 12.sp;
 
   static double h20 = 20.h;
+
+  static double r8 = 8.r;
 }

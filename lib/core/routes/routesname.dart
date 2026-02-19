@@ -5,4 +5,6 @@ abstract class RouteName {
   static const String foregetpassword = "/forgetpassword";
   static const String otpverficationc = "/optverivication";
   static const String confirmPassword = "/ConfirmPassword";
+
+  static const String seeAll = "/seeAll";
 }

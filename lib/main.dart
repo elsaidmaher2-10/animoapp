@@ -11,6 +11,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setupgetit();
+
   await SharedPrefManager().init();
   bool islogin = SharedPrefManager().getBool("ischeck") ?? true;
 
@@ -35,8 +36,7 @@ class MyApp extends StatelessWidget {
                   OtpvericationcontrollerCubit(getIt<Otpvreficationrepo>()),
             ),
           ],
-
-                child: MaterialApp(
+          child: MaterialApp(
             initialRoute: islogin ? RouteName.home : RouteName.login,
             debugShowCheckedModeBanner: false,
             onGenerateRoute: RoutesManager.ongenerate,

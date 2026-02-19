@@ -78,4 +78,18 @@ class constantManager {
   static String submit = 'Submit';
 
   static String save = "Save";
+
+  static String public = "Public";
+
+  static String categoryname = "Category Name";
+
+  static String categorynameh = 'Enter your Category Name';
+
+  static String categorydesc = "Category Description";
+
+  static String categorydesch = 'Enter your Description';
+
+  static String createnewcategory = "Create New Category";
+
+  static String seeAllKey = "SeeAllKey";
 }

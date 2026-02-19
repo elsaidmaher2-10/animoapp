@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'package:animoapp/core/DI/getit.dart';
 import 'package:animoapp/core/resource/colormanager.dart';
+import 'package:animoapp/core/resource/constantsmanager.dart';
+import 'package:animoapp/feature/home/hometab.dart';
 import 'package:animoapp/feature/home/presentation/views/category.dart';
-import 'package:animoapp/feature/home/presentation/views/home.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +14,7 @@ class Mainscreen extends StatelessWidget {
 
   int curindex = 0;
   List<Widget> screens = [
-    Home(),
+    Hometab(),
     Center(child: Text("data")),
     Category(),
     Center(child: Text("data2")),
@@ -33,6 +35,11 @@ class Mainscreen extends StatelessWidget {
                 backgroundColor: Colors.transparent,
                 currentIndex: snapshot.data ?? 0,
                 onTap: (index) {
+                  if (index == 0) {
+                    getIt<GlobalKey<NavigatorState>>(
+                      instanceName: constantManager.seeAllKey,
+                    ).currentState?.popUntil((route) => route.isFirst);
+                  }
                   streamController.add(index);
 
                   curindex = index;

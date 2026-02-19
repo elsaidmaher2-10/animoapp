@@ -25,10 +25,10 @@ class Uploadimage extends StatelessWidget {
             width: 250.w,
           );
         } else if (state is Singupimagedosentselected) {
-          imageWidget = Icon(
-            Icons.upload_file,
-            color: ColorManger.red,
-            size: 40,
+          imageWidget = SizedBox(
+            height: 200,
+            width: 200,
+            child: Icon(Icons.upload_file, color: ColorManger.red, size: 100),
           );
         } else {
           imageWidget = Image.asset(
@@ -88,7 +88,10 @@ class Uploadimage extends StatelessWidget {
                                     Text(
                                       "Select file",
                                       style: TextStyle(
-                                        color: ColorManger.kprimary,
+                                        color:
+                                            state is Singupimagedosentselected
+                                            ? ColorManger.red
+                                            : ColorManger.kprimary,
                                       ),
                                     ),
                                   ],
