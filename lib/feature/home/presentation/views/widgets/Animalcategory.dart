@@ -1,12 +1,11 @@
-
 import 'package:animoapp/core/resource/assetvaluemanger.dart';
 import 'package:animoapp/core/resource/colormanager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Animalcategory extends StatelessWidget {
-  const Animalcategory({super.key});
-
+  const Animalcategory({super.key, required this.ontap});
+  final Function()? ontap;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -23,12 +22,15 @@ class Animalcategory extends StatelessWidget {
             ),
           ),
 
-          Text(
-            "Add New Animal",
-            style: TextStyle(
-              fontSize: 12.sp,
-              color: ColorManger.black,
-              fontFamily: FontFamily.poppinsExtraBold,
+          InkWell(
+            onTap: ontap,
+            child: Text(
+              "Add New Animal",
+              style: TextStyle(
+                fontSize: 12.sp,
+                color: ColorManger.black,
+                fontFamily: FontFamily.poppinsExtraBold,
+              ),
             ),
           ),
         ],

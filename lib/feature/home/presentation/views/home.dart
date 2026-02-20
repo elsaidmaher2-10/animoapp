@@ -6,8 +6,9 @@ import 'package:animoapp/feature/home/presentation/views/widgets/Homepagecategor
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
-  Home({super.key});
-
+  Home({required this.onTap,required this.onTap2});
+  Function()? onTap;
+  Function()? onTap2;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -15,9 +16,9 @@ class Home extends StatelessWidget {
         child: Column(
           children: [
             Homepageappbar(),
-            Homepagecategory(),
+            Homepagecategory(onTap: onTap, ),
             HomepageAnimalList(),
-            Animalcategory(),
+            Animalcategory(ontap: onTap2),
             AnimalWidget(),
           ],
         ),

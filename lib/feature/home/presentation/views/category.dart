@@ -22,7 +22,7 @@ class Category extends StatefulWidget {
 
 TextEditingController categroynamecontroller = TextEditingController();
 TextEditingController categryDescontroller = TextEditingController();
-StreamController<bool> streamController = StreamController();
+StreamController<bool> streamController = StreamController.broadcast();
 
 class _CategoryState extends State<Category> {
   bool isvalid = false;
@@ -72,7 +72,7 @@ class _CategoryState extends State<Category> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Ahmed El-said",
+                        "El-said Maher",
                         style: TextStyle(
                           fontSize: screeutilsManager.s12,
                           color: ColorManger.black,

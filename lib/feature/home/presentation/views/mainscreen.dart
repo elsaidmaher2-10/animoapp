@@ -8,18 +8,35 @@ import 'package:animoapp/feature/home/presentation/views/category.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class Mainscreen extends StatelessWidget {
-  Mainscreen({super.key});
+GlobalKey<_MainscreenState> mainkey = GlobalKey();
+
+class Mainscreen extends StatefulWidget {
+  Mainscreen({Key? key}) : super(key: mainkey);
+
+  @override
+  State<Mainscreen> createState() => _MainscreenState();
+}
+
+class _MainscreenState extends State<Mainscreen> {
   StreamController<int> streamController = StreamController.broadcast();
 
   int curindex = 0;
-  List<Widget> screens = [
-    Hometab(),
-    Center(child: Text("data")),
-    Category(),
-    Center(child: Text("data2")),
-    Center(child: Text("data3")),
+
+  List<Widget> get screens => [
+    Hometab(
+      onTap2: () {
+        streamController.add(3);
+      },
+      onTap: () {
+        streamController.add(2);
+      },
+    ),
+    const Center(child: Text("data")),
+    const Category(),
+    const Center(child: Text("data2")),
+    const Center(child: Text("data3")),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -6,8 +6,9 @@ import 'package:animoapp/feature/home/seeAll.dart';
 import 'package:flutter/material.dart';
 
 class Hometab extends StatelessWidget {
-  const Hometab({super.key});
-
+  const Hometab({super.key, required this.onTap, required this.onTap2});
+  final Function()? onTap;
+  final Function()? onTap2;
   @override
   Widget build(BuildContext context) {
     return Navigator(
@@ -15,11 +16,15 @@ class Hometab extends StatelessWidget {
         instanceName: constantManager.seeAllKey,
       ),
       onGenerateRoute: (settings) {
+        print(settings.name);
         switch (settings.name) {
-          case "/":
-            return MaterialPageRoute(builder: (context) => Home());
           case RouteName.seeAll:
             return MaterialPageRoute(builder: (context) => SeeAll());
+
+          default:
+            return MaterialPageRoute(
+              builder: (context) => Home(onTap: onTap, onTap2: onTap2),
+            );
         }
       },
     );

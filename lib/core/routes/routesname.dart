@@ -6,5 +6,5 @@ abstract class RouteName {
   static const String otpverficationc = "/optverivication";
   static const String confirmPassword = "/ConfirmPassword";
 
-  static const String seeAll = "/seeAll";
+  static const String seeAll = "/SeeAll";
 }
