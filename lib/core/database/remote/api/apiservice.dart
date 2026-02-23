@@ -8,6 +8,18 @@ class Apiservice extends Apiconsumer {
 
   Apiservice(this.dio) {
     dio.options.baseUrl = Apiconstant.baseurl;
+    dio.interceptors.add(
+      LogInterceptor(
+        request: true,
+        requestUrl: true,
+        requestHeader: true,
+        requestBody: false,
+        responseUrl: true,
+        responseHeader: true,
+        responseBody: false,
+        error: true,
+      ),
+    );
   }
 
   @override
@@ -18,8 +30,8 @@ class Apiservice extends Apiconsumer {
   }) async {
     try {
       final response = await dio.post(
+        options: Options(headers: queryparam),
         path,
-        queryParameters: queryparam,
         data: data,
       );
       return response.data;

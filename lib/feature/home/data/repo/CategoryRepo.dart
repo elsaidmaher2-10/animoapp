@@ -1,8 +1,12 @@
+import 'dart:developer';
+
 import 'package:animoapp/core/database/local/sharedprefrence/sharedprefmanager.dart';
 import 'package:animoapp/core/database/remote/api/apiconstant.dart';
 import 'package:animoapp/core/database/remote/api/apiservice.dart';
 import 'package:animoapp/core/database/remote/error/failuerresponse.dart';
 import 'package:animoapp/core/database/remote/error/serverExpctionmodel.dart';
+import 'package:animoapp/core/resource/constantsmanager.dart';
+import 'package:animoapp/core/service/networkchecker.dart';
 import 'package:animoapp/feature/home/data/models/CategorySuccessResponse.dart';
 import 'package:animoapp/feature/home/data/models/categorymodel.dart';
 import 'package:dartz/dartz.dart';
@@ -15,6 +19,14 @@ class Categoryrepo {
   Future<Either<Failuerresponse, Categorysuccessresponse>> createNewCategory(
     Categorymodel categorymodel,
   ) async {
+    if (!await Networkchecker.checkinternet()) {
+      return left(
+        Failuerresponse(
+          error: [constantManager.Nointernetconnection],
+          statusCode: 1,
+        ),
+      );
+    }
     try {
       String token = SharedPrefManager().getString("access_token") ?? "";
       final response = await apiservice.post(
@@ -22,13 +34,17 @@ class Categoryrepo {
         data: FormData.fromMap({
           "name": categorymodel.name,
           "description": categorymodel.description,
-          "image": categorymodel.image,
+          "image": await MultipartFile.fromFile(
+            categorymodel.image.path,
+            filename: categorymodel.image.path.split("/").last,
+          ),
         }),
         queryparam: {"Authorization": "Bearer $token"},
       );
 
       return right(Categorysuccessresponse.fromjson(response));
     } on Serverexpctionmodel catch (e) {
+      log(e.message.toString());
       if (e.message is Map) {
         final d = Failuerresponse.fromjson(e.message);
         return left(d);
@@ -41,6 +57,8 @@ class Categoryrepo {
         );
       }
     } catch (e) {
+      log(e.toString());
+
       return left(Failuerresponse(error: [e.toString()], statusCode: 500));
     }
   }

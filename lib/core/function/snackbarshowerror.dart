@@ -4,11 +4,12 @@ import 'package:animoapp/core/resource/screenutilsmaanger.dart';
 import 'package:flutter/material.dart';
 
 class AppSnackBar {
-  static const Color kPrimary = Color(0xff04332D);
   static void show({
     required BuildContext context,
     required String message,
     required VoidCallback onRetry,
+
+    Color backgroundcolor = const Color(0xff04332D),
     Duration duration = const Duration(seconds: 5),
   }) {
     ScaffoldMessenger.of(context).showSnackBar(
@@ -27,7 +28,7 @@ class AppSnackBar {
             topRight: Radius.circular(8),
           ),
         ),
-        backgroundColor: const Color.fromARGB(255, 32, 99, 90),
+        backgroundColor: backgroundcolor,
         dismissDirection: DismissDirection.endToStart,
         content: Text(
           message,

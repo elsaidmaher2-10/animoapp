@@ -33,8 +33,9 @@ class _OtpvrificationcodeState extends State<Otpvrificationcode> {
   }
 
   initState() {
-    super.initState();
     context.read<OtpvericationcontrollerCubit>().init();
+
+    super.initState();
   }
 
   @override
