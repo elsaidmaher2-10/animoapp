@@ -60,4 +60,37 @@ class Categoryrepo {
       return left(Failuerresponse(error: [e.toString()], statusCode: 500));
     }
   }
+   Future<Either<Failuerresponse, Categorysuccessresponse>> getAllCategory(
+    Categorymodel categorymodel,
+  ) async {
+    if (!await Networkchecker.checkinternet()) {
+      return left(
+        Failuerresponse(
+          error: [constantManager.Nointernetconnection],
+          statusCode: 1,
+        ),
+      );
+    }
+    try {
+      final response = await apiservice.get(
+        path: Apiconstant.getAllcategoryendpoint);
+    
+      return right(Categorysuccessresponse.fromjson(response));
+    } on Serverexpctionmodel catch (e) {
+      if (e.message is Map) {
+        final d = Failuerresponse.fromjson(e.message);
+        return left(d);
+      } else {
+        return left(
+          Failuerresponse(
+            error: [e.message.toString()],
+            statusCode: e.statuscode,
+          ),
+        );
+      }
+    } catch (e) {
+
+      return left(Failuerresponse(error: [e.toString()], statusCode: 500));
+    }
+  }
 }

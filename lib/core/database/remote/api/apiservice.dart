@@ -82,7 +82,7 @@ class Apiservice extends Apiconsumer {
   @override
   Future get({
     required String path,
-    required Map<String, dynamic> queryparam,
+     Map<String, dynamic>? queryparam,
   }) async {
     {
       try {

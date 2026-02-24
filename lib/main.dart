@@ -12,7 +12,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setupgetit();
   await SharedPrefManager().init();
-  bool islogin = SharedPrefManager().getBool("ischeck") ?? true;
+  bool islogin = SharedPrefManager().getBool("ischeck") ??true;
   runApp(MyApp(islogin));
 }
 
@@ -35,8 +35,7 @@ class MyApp extends StatelessWidget {
             ),
           ],
           child: MaterialApp(
-
-          key:mainkey ,
+            key: mainkey,
             initialRoute: islogin ? RouteName.home : RouteName.login,
             debugShowCheckedModeBanner: false,
             onGenerateRoute: RoutesManager.ongenerate,
@@ -46,4 +45,5 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-GlobalKey <NavigatorState> mainkey=GlobalKey();
+
+GlobalKey<NavigatorState> mainkey = GlobalKey();
