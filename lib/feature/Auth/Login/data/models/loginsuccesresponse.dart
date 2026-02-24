@@ -26,7 +26,6 @@ class Loginsuccesresponse {
     required this.user,
   });
   factory Loginsuccesresponse.fromjosn(json) {
-    print(json);
     return Loginsuccesresponse(
       access_token: json["access_token"],
       message: json["message"],

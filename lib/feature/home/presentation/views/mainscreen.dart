@@ -8,27 +8,26 @@ import 'package:animoapp/feature/home/presentation/views/category.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-GlobalKey<_MainscreenState> mainkey = GlobalKey();
+GlobalKey<_MainscreenState> mainscreen = GlobalKey();
 
 class Mainscreen extends StatefulWidget {
-  Mainscreen({Key? key}) : super(key: mainkey);
+  Mainscreen({Key? key}) : super(key: mainscreen);
 
   @override
   State<Mainscreen> createState() => _MainscreenState();
 }
 
 class _MainscreenState extends State<Mainscreen> {
-  StreamController<int> streamController = StreamController.broadcast();
-
+  StreamController<int> stream = StreamController.broadcast();
   int curindex = 0;
 
   List<Widget> get screens => [
     Hometab(
       onTap2: () {
-        streamController.add(3);
+        stream.add(3);
       },
       onTap: () {
-        streamController.add(2);
+        stream.add(2);
       },
     ),
     const Center(child: Text("data")),
@@ -43,23 +42,21 @@ class _MainscreenState extends State<Mainscreen> {
       backgroundColor: ColorManger.white,
       extendBody: true,
       bottomNavigationBar: StreamBuilder(
-        initialData: 0,
-        stream: streamController.stream,
+        initialData: curindex,
+        stream: stream.stream,
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) =>
             Container(
               decoration: BoxDecoration(color: Colors.white.withOpacity(0.1)),
               child: BottomNavigationBar(
                 backgroundColor: Colors.transparent,
-                currentIndex: snapshot.data ?? 0,
+                currentIndex: snapshot.data,
                 onTap: (index) {
                   if (index == 0) {
                     getIt<GlobalKey<NavigatorState>>(
                       instanceName: constantManager.seeAllKey,
                     ).currentState?.popUntil((route) => route.isFirst);
                   }
-                  streamController.add(index);
-
-                  curindex = index;
+                  stream.add(index);
                 },
                 elevation: 0,
                 selectedItemColor: ColorManger.kprimary,
@@ -91,7 +88,7 @@ class _MainscreenState extends State<Mainscreen> {
             ),
       ),
       body: StreamBuilder(
-        stream: streamController.stream,
+        stream: stream.stream,
         builder: (ctx, snap) => screens[snap.data ?? 0],
       ),
     );

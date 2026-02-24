@@ -60,10 +60,7 @@ class _LoginpageState extends State<Loginpage> {
                   onRetry: () {},
                 );
               } else if (state is LogincontrollerSuccess) {
-                SharedPrefManager().setString(
-                  "access_token",
-                  state.response.access_token,
-                );
+      
                 SharedPrefManager().setString(
                   "refresh_token",
                   state.response.refresh_token,

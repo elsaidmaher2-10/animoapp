@@ -16,7 +16,6 @@ class Hometab extends StatelessWidget {
         instanceName: constantManager.seeAllKey,
       ),
       onGenerateRoute: (settings) {
-        print(settings.name);
         switch (settings.name) {
           case RouteName.seeAll:
             return MaterialPageRoute(builder: (context) => SeeAll());

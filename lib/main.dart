@@ -35,6 +35,8 @@ class MyApp extends StatelessWidget {
             ),
           ],
           child: MaterialApp(
+
+          key:mainkey ,
             initialRoute: islogin ? RouteName.home : RouteName.login,
             debugShowCheckedModeBanner: false,
             onGenerateRoute: RoutesManager.ongenerate,
@@ -44,3 +46,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+GlobalKey <NavigatorState> mainkey=GlobalKey();

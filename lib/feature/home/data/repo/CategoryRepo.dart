@@ -44,7 +44,6 @@ class Categoryrepo {
 
       return right(Categorysuccessresponse.fromjson(response));
     } on Serverexpctionmodel catch (e) {
-      log(e.message.toString());
       if (e.message is Map) {
         final d = Failuerresponse.fromjson(e.message);
         return left(d);
@@ -57,7 +56,6 @@ class Categoryrepo {
         );
       }
     } catch (e) {
-      log(e.toString());
 
       return left(Failuerresponse(error: [e.toString()], statusCode: 500));
     }

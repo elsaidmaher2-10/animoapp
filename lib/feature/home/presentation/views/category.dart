@@ -16,7 +16,9 @@ import 'package:animoapp/feature/Auth/register/presentation/views/widget/uploadi
 import 'package:animoapp/feature/home/data/models/categorymodel.dart';
 import 'package:animoapp/feature/home/data/repo/CategoryRepo.dart';
 import 'package:animoapp/feature/home/presentation/manager/cubit/categorycontroller_cubit.dart';
+import 'package:animoapp/feature/home/presentation/views/mainscreen.dart';
 import 'package:animoapp/feature/home/presentation/views/widgets/homebutton.dart';
+import 'package:animoapp/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -49,7 +51,6 @@ class _CategoryState extends State<Category> {
         categryDescontroller.text.isNotEmpty &&
         categroynamecontroller.text.length > 12 &&
         categryDescontroller.text.length > 100;
-    print(isvalid);
 
     streamController.add(isvalid);
   }
@@ -70,7 +71,6 @@ class _CategoryState extends State<Category> {
         builder: (context) {
           return BlocConsumer<CategorycontrollerCubit, CategorycontrollerState>(
             listener: (context, state) async {
-              log(state.toString());
               if (state is CategorycontrollerFailure) {
                 AppSnackBar.show(
                   context: context,
@@ -85,6 +85,10 @@ class _CategoryState extends State<Category> {
                   message: state.resposne.message,
                   onRetry: () {},
                 );
+
+                if (!mainscreen.currentState!.stream.isClosed) {
+                  mainscreen.currentState!.stream.add(0);
+                }
               }
             },
             buildWhen: (previous, current) {
@@ -229,11 +233,8 @@ class _CategoryState extends State<Category> {
                                         File? image = context
                                             .read<SingupCubit>()
                                             .image;
-                                        print(
-                                          SharedPrefManager().getString(
-                                            "access_token",
-                                          ),
-                                        );
+
+                                        ;
 
                                         if (image != null) {
                                           context
@@ -248,9 +249,6 @@ class _CategoryState extends State<Category> {
                                                       categryDescontroller.text,
                                                 ),
                                               );
-
-                                          categroynamecontroller.clear();
-                                          categryDescontroller.clear();
                                         }
                                       }
                                     : null,

@@ -10,7 +10,6 @@ class Categorysuccessresponse {
   });
 
   factory Categorysuccessresponse.fromjson(json) {
-    print(json);
     return Categorysuccessresponse(
       category: Category.fromjson(json["Category"]),
       message: json["message"],
@@ -39,7 +38,6 @@ class Category {
   });
 
   factory Category.fromjson(json) {
-    print(json);
     return Category(
       createAt: json["createdAt"],
       description: json["description"] ?? "",

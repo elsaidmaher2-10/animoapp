@@ -7,4 +7,6 @@ class Apiconstant {
   static String forgetPasswordendpoint = "/api/forget_password";
   static String createnewpassowrdAPIEndpoint = "/api/create_new_possword";
   static String createNewCategory = "/api/createNewCategory";
+  static String newAccessToken = "/api/generateAccessToken";
+  static String getAllcategoryendpoint = "/api/allCategories";
 }

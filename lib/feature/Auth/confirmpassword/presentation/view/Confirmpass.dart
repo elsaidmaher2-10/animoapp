@@ -67,7 +67,6 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
   @override
   Widget build(BuildContext context) {
     Map args = ModalRoute.of(context)?.settings.arguments as Map? ?? {};
-    print(args);
     return BlocProvider(
       create: (context) => ConfirmPasswordController(
         Confirmpasswordrepo(

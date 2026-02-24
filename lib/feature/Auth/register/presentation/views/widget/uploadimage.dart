@@ -21,8 +21,8 @@ class Uploadimage extends StatelessWidget {
           imageWidget = Image.file(
             state.image,
             fit: BoxFit.fill,
-            height: 300.h,
-            width: 250.w,
+            height: 250,
+            width: 250,
           );
         } else if (state is Singupimagedosentselected) {
           imageWidget = SizedBox(
@@ -34,7 +34,6 @@ class Uploadimage extends StatelessWidget {
           imageWidget = Image.asset(
             height: 30,
             AssetValueManager.uploadimage,
-
             fit: BoxFit.contain,
           );
         }

@@ -13,9 +13,7 @@ class HomepageAnimalList extends StatelessWidget {
 
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
-        /*indx == 0 || indx == 9
-            ? Padding(padding: EdgeInsetsGeometry.all(3))
-            : */
+
         itemBuilder: (ctx, indx) => indx == 9
             ? Padding(
                 padding: const EdgeInsets.symmetric(
@@ -26,9 +24,7 @@ class HomepageAnimalList extends StatelessWidget {
                   style: TextButton.styleFrom(
                     padding: EdgeInsets.all(0),
                     backgroundColor: Color(0xff155F45),
-                    foregroundColor: Colors.white,
-                  ),
-
+                    foregroundColor: Colors.white),
                   onPressed: () {
                     Navigator.pushNamed(context, RouteName.seeAll);
                   },
@@ -61,11 +57,12 @@ class HomepageAnimalList extends StatelessWidget {
                     "Dogs",
                     style: TextStyle(color: ColorManger.black, fontSize: 16.sp),
                   ),
-                ],
-              ),
+                ],)
+              ,
         separatorBuilder: (ctx, index) => SizedBox(width: 12.w),
         itemCount: 10,
-      ),
+      )
     );
+
   }
 }
