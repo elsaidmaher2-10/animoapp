@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:animoapp/core/database/local/sharedprefrence/sharedprefmanager.dart';
 import 'package:animoapp/core/database/remote/api/apiconstant.dart';
 import 'package:animoapp/core/database/remote/api/apiservice.dart';
@@ -18,6 +16,7 @@ class Categoryrepo {
   Categoryrepo({required this.apiservice});
   Future<Either<Failuerresponse, Categorysuccessresponse>> createNewCategory(
     Categorymodel categorymodel,
+    bool isedit,
   ) async {
     if (!await Networkchecker.checkinternet()) {
       return left(
@@ -30,7 +29,9 @@ class Categoryrepo {
     try {
       String token = SharedPrefManager().getString("access_token") ?? "";
       final response = await apiservice.post(
-        path: Apiconstant.createNewCategory,
+        path: isedit == true
+            ? Apiconstant.updateCategory
+            : Apiconstant.createNewCategory,
         data: FormData.fromMap({
           "name": categorymodel.name,
           "description": categorymodel.description,
@@ -56,13 +57,11 @@ class Categoryrepo {
         );
       }
     } catch (e) {
-
       return left(Failuerresponse(error: [e.toString()], statusCode: 500));
     }
   }
-   Future<Either<Failuerresponse, Categorysuccessresponse>> getAllCategory(
-    Categorymodel categorymodel,
-  ) async {
+
+  Future<Either<Failuerresponse, String>> deleteCategory(int id) async {
     if (!await Networkchecker.checkinternet()) {
       return left(
         Failuerresponse(
@@ -72,10 +71,12 @@ class Categoryrepo {
       );
     }
     try {
-      final response = await apiservice.get(
-        path: Apiconstant.getAllcategoryendpoint);
-    
-      return right(Categorysuccessresponse.fromjson(response));
+      final response = await apiservice.delete(
+        path: Apiconstant.deleteCategory,
+        queryparam: {"id": id.toString()},
+      );
+
+      return right(response["message"]);
     } on Serverexpctionmodel catch (e) {
       if (e.message is Map) {
         final d = Failuerresponse.fromjson(e.message);
@@ -89,7 +90,39 @@ class Categoryrepo {
         );
       }
     } catch (e) {
+      return left(Failuerresponse(error: [e.toString()], statusCode: 500));
+    }
+  }
 
+  Future<Either<Failuerresponse, GetCategorysuccessresponse>>
+  getAllCategory() async {
+    if (!await Networkchecker.checkinternet()) {
+      return left(
+        Failuerresponse(
+          error: [constantManager.Nointernetconnection],
+          statusCode: 1,
+        ),
+      );
+    }
+    try {
+      final response = await apiservice.get(
+        path: Apiconstant.getAllcategoryendpoint,
+      );
+
+      return right(GetCategorysuccessresponse.fromjson(response));
+    } on Serverexpctionmodel catch (e) {
+      if (e.message is Map) {
+        final d = Failuerresponse.fromjson(e.message);
+        return left(d);
+      } else {
+        return left(
+          Failuerresponse(
+            error: [e.message.toString()],
+            statusCode: e.statuscode,
+          ),
+        );
+      }
+    } catch (e) {
       return left(Failuerresponse(error: [e.toString()], statusCode: 500));
     }
   }

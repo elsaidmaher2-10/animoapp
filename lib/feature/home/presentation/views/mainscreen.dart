@@ -31,7 +31,7 @@ class _MainscreenState extends State<Mainscreen> {
       },
     ),
     const Center(child: Text("data")),
-    const Category(),
+    const CategoryScreen(),
     const Center(child: Text("data2")),
     const Center(child: Text("data3")),
   ];

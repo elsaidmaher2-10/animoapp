@@ -4,22 +4,25 @@ import 'package:animoapp/core/routes/routesmanager.dart';
 import 'package:animoapp/core/routes/routesname.dart';
 import 'package:animoapp/feature/Auth/otpverifcation/data/repo/Otpvrefication.dart';
 import 'package:animoapp/feature/Auth/otpverifcation/presentation/manager/otpvericationcontroller/otpvericationcontroller_cubit.dart';
+import 'package:animoapp/feature/home/presentation/manager/cubit/categorycontroller_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   setupgetit();
   await SharedPrefManager().init();
-  bool islogin = SharedPrefManager().getBool("ischeck") ??true;
+  String? islogin = SharedPrefManager().getString("access_token");
+  print(islogin);
   runApp(MyApp(islogin));
 }
 
 class MyApp extends StatelessWidget {
   MyApp(this.islogin, {super.key});
 
-  bool islogin;
+  String? islogin;
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -33,10 +36,11 @@ class MyApp extends StatelessWidget {
               create: (_) =>
                   OtpvericationcontrollerCubit(getIt<Otpvreficationrepo>()),
             ),
+            BlocProvider(create: (_) => getIt<CategorycontrollerCubit>()),
           ],
           child: MaterialApp(
             key: mainkey,
-            initialRoute: islogin ? RouteName.home : RouteName.login,
+            initialRoute: islogin != null ? RouteName.home : RouteName.login,
             debugShowCheckedModeBanner: false,
             onGenerateRoute: RoutesManager.ongenerate,
           ),

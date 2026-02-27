@@ -92,4 +92,7 @@ class constantManager {
   static String createnewcategory = "Create New Category";
 
   static String seeAllKey = "SeeAllKey";
+
+  static String edit = "Edit";
+  static String delete = "Delete";
 }

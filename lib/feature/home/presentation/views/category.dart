@@ -1,9 +1,8 @@
 import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
+
 import 'package:animoapp/core/DI/getit.dart';
-import 'package:animoapp/core/database/local/sharedprefrence/sharedprefmanager.dart';
-import 'package:animoapp/core/database/remote/api/apiservice.dart';
 import 'package:animoapp/core/function/snackbarshowerror.dart';
 import 'package:animoapp/core/resource/assetvaluemanger.dart';
 import 'package:animoapp/core/resource/colormanager.dart';
@@ -14,29 +13,29 @@ import 'package:animoapp/feature/Auth/register/presentation/manager/imagepickerc
 import 'package:animoapp/feature/Auth/register/presentation/views/widget/showmodalbottomsheetimage.dart';
 import 'package:animoapp/feature/Auth/register/presentation/views/widget/uploadimage.dart';
 import 'package:animoapp/feature/home/data/models/categorymodel.dart';
-import 'package:animoapp/feature/home/data/repo/CategoryRepo.dart';
 import 'package:animoapp/feature/home/presentation/manager/cubit/categorycontroller_cubit.dart';
+import 'package:animoapp/feature/home/presentation/manager/cubit/categorycontroller_state.dart';
 import 'package:animoapp/feature/home/presentation/views/mainscreen.dart';
 import 'package:animoapp/feature/home/presentation/views/widgets/homebutton.dart';
-import 'package:animoapp/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-class Category extends StatefulWidget {
-  const Category({super.key});
+class CategoryScreen extends StatefulWidget {
+  const CategoryScreen({super.key});
 
   @override
-  State<Category> createState() => _CategoryState();
+  State<CategoryScreen> createState() => _CategoryScreenState();
 }
 
 TextEditingController categroynamecontroller = TextEditingController();
 TextEditingController categryDescontroller = TextEditingController();
 StreamController<bool> streamController = StreamController.broadcast();
+String? image;
 
-class _CategoryState extends State<Category> {
+class _CategoryScreenState extends State<CategoryScreen> {
   bool isvalid = false;
   @override
   void initState() {
@@ -57,14 +56,10 @@ class _CategoryState extends State<Category> {
 
   @override
   Widget build(BuildContext context) {
+    final data = ModalRoute.of(context)?.settings.arguments as Map?;
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (context) => CategorycontrollerCubit(
-            Categoryrepo(apiservice: getIt<Apiservice>()),
-          ),
-        ),
-
+        BlocProvider.value(value: getIt<CategorycontrollerCubit>()),
         BlocProvider(create: (context) => SingupCubit()),
       ],
       child: Builder(
@@ -90,14 +85,25 @@ class _CategoryState extends State<Category> {
                   mainscreen.currentState!.stream.add(0);
                 }
               }
-            },
-            buildWhen: (previous, current) {
-              return current is CategorycontrollerLoading ||
-                  current is CategorycontrollerSuccess ||
-                  current is CategorycontrollerFailure ||
-                  current is CategorycontrollerInitial;
+              if (state is Categorycontrollerdeleted) {
+                AppSnackBar.show(
+                  context: context,
+                  message: state.message,
+                  onRetry: () {},
+                );
+
+                if (!mainscreen.currentState!.stream.isClosed) {
+                  mainscreen.currentState!.stream.add(0);
+                }
+              }
             },
             builder: (context, state) {
+              log(state.toString());
+              if (state is CategorycontrollerEdit) {
+                image = state.category.imagepath;
+                categryDescontroller.text = state.category.description;
+                categroynamecontroller.text = state.category.name;
+              }
               bool isasync = false;
               if (state is CategorycontrollerLoading) {
                 isasync = true;
@@ -216,6 +222,10 @@ class _CategoryState extends State<Category> {
                           SizedBox(height: screeutilsManager.h16),
                           Builder(
                             builder: (BuildContext context) => Uploadimage(
+                              image: image,
+                              edit: state is CategorycontrollerEdit
+                                  ? true
+                                  : false,
                               onTap: () {
                                 showSignupImageBottomSheet(context);
                               },
@@ -228,6 +238,9 @@ class _CategoryState extends State<Category> {
                             stream: streamController.stream,
                             builder: (context, asyncSnapshot) {
                               return Homebutton(
+                                text: state is CategorycontrollerEdit
+                                    ? constantManager.edit
+                                    : constantManager.save,
                                 onPressed: asyncSnapshot.data == true
                                     ? () {
                                         File? image = context
@@ -242,19 +255,36 @@ class _CategoryState extends State<Category> {
                                               .createNewCategory(
                                                 Categorymodel(
                                                   description:
-                                                      categroynamecontroller
-                                                          .text,
-                                                  image: image,
-                                                  name:
                                                       categryDescontroller.text,
+                                                  image: image,
+                                                  name: categroynamecontroller
+                                                      .text,
                                                 ),
+                                                state is CategorycontrollerEdit
+                                                    ? true
+                                                    : false,
                                               );
+                                          context
+                                              .read<CategorycontrollerCubit>()
+                                              .updategetAllCategory();
                                         }
                                       }
                                     : null,
                               );
                             },
                           ),
+
+                          state is CategorycontrollerEdit
+                              ? Homebutton(
+                                  text: constantManager.delete,
+                                  onPressed: () {
+                                    log(state.category.id.toString());
+                                    context
+                                        .read<CategorycontrollerCubit>()
+                                        .deleteCategory(state.category.id);
+                                  },
+                                )
+                              : SizedBox.shrink(),
                         ],
                       ),
                     ),

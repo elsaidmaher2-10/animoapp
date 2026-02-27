@@ -80,10 +80,7 @@ class Apiservice extends Apiconsumer {
   }
 
   @override
-  Future get({
-    required String path,
-     Map<String, dynamic>? queryparam,
-  }) async {
+  Future get({required String path, Map<String, dynamic>? queryparam}) async {
     {
       try {
         final response = await dio.get(path, queryParameters: queryparam);
@@ -152,9 +149,23 @@ class Apiservice extends Apiconsumer {
         SharedPrefManager().setString("access_token", newAccessToken);
         return true;
       }
+      
       return false;
     } catch (e) {
       return false;
+    }
+  }
+
+  @override
+  delete({
+    required String path,
+    required Map<String, dynamic>? queryparam,
+  }) async {
+    try {
+      final response = await dio.delete(queryParameters: queryparam, path);
+      return response.data;
+    } on DioException catch (e) {
+      throw _handleDioError(e);
     }
   }
 }

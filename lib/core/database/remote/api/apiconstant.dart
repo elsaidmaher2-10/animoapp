@@ -9,4 +9,6 @@ class Apiconstant {
   static String createNewCategory = "/api/createNewCategory";
   static String newAccessToken = "/api/generateAccessToken";
   static String getAllcategoryendpoint = "/api/allCategories";
+  static String updateCategory = "/api/updateCategory";
+  static String deleteCategory = "/api/deleteCategory";
 }

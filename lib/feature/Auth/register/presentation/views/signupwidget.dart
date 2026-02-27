@@ -188,6 +188,7 @@ class _SingnupState extends State<Singnup> {
                                   ),
 
                                   Uploadimage(
+                                    edit: false,
                                     onTap: () {
                                       showSignupImageBottomSheet(context);
                                     },
