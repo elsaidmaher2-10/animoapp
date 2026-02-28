@@ -95,4 +95,17 @@ class constantManager {
 
   static String edit = "Edit";
   static String delete = "Delete";
+
+  static String anmailname = "ANInal";
+
+  static String AnimalName = "AnimalName";
+  static String animalnamehint = "Enter your Animal Name";
+  static String animaldesc = "Animal Description";
+  static String animaldeschint = "Enter your Description";
+  static String AnimalPrice = "Animal Price";
+  static String AnimalPricehint = "Enter your Animal Price";
+
+  static String createnewanimal = "Create New Animal";
+
+  static String add = "Add";
 }

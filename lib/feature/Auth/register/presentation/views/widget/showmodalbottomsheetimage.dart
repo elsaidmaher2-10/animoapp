@@ -1,4 +1,3 @@
-
 import 'dart:io';
 
 import 'package:animoapp/core/function/imagebutton.dart';
@@ -37,6 +36,7 @@ void showSignupImageBottomSheet(BuildContext context) {
           onPressed: () async {
             File? image = await imagepickerservice(context, ImageSource.camera);
             context.read<SingupCubit>().imagepickerstate(image);
+
             Navigator.pop(ctx);
           },
           text: constantManager.camera,

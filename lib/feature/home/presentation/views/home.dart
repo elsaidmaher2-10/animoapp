@@ -20,6 +20,7 @@ class Home extends StatelessWidget {
         backgroundColor: Colors.white,
         onRefresh: () {
           return context.read<CategorycontrollerCubit>().getAllcategory();
+          
         },
         child: SingleChildScrollView(
           child: Column(

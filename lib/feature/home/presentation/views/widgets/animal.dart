@@ -12,9 +12,10 @@ import 'package:animoapp/core/widget/customtextfromfield.dart';
 import 'package:animoapp/feature/Auth/register/presentation/manager/imagepickercubit/singup_cubit.dart';
 import 'package:animoapp/feature/Auth/register/presentation/views/widget/showmodalbottomsheetimage.dart';
 import 'package:animoapp/feature/Auth/register/presentation/views/widget/uploadimage.dart';
-import 'package:animoapp/feature/home/data/models/categorymodel.dart';
+import 'package:animoapp/feature/home/data/models/CategorySuccessResponse.dart';
 import 'package:animoapp/feature/home/presentation/manager/cubit/categorycontroller_cubit.dart';
 import 'package:animoapp/feature/home/presentation/manager/cubit/categorycontroller_state.dart';
+import 'package:animoapp/feature/home/presentation/views/category.dart';
 import 'package:animoapp/feature/home/presentation/views/mainscreen.dart';
 import 'package:animoapp/feature/home/presentation/views/widgets/homebutton.dart';
 import 'package:flutter/cupertino.dart';
@@ -23,44 +24,46 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-class CategoryScreen extends StatefulWidget {
-  const CategoryScreen({super.key});
+class AnimalScreen extends StatefulWidget {
+  AnimalScreen({super.key, required this.generateListStringAnimal});
+
+  List<Category> generateListStringAnimal;
 
   @override
-  State<CategoryScreen> createState() => _CategoryScreenState();
+  State<AnimalScreen> createState() => _AnimalScreenState();
 }
 
-TextEditingController categroynamecontroller = TextEditingController();
-TextEditingController categryDescontroller = TextEditingController();
+TextEditingController animalNameController = TextEditingController();
+TextEditingController animalDescController = TextEditingController();
 StreamController<bool> streamController = StreamController.broadcast();
-String? image;
+String? animalImage;
 
-class _CategoryScreenState extends State<CategoryScreen> {
+class _AnimalScreenState extends State<AnimalScreen> {
   bool isvalid = false;
+
   @override
   void initState() {
-    categroynamecontroller.addListener(isvalidc);
-    categryDescontroller.addListener(isvalidc);
+    animalNameController.addListener(isvalidc);
+    animalDescController.addListener(isvalidc);
     super.initState();
   }
 
-  isvalidc() {
+  void isvalidc() {
     isvalid =
-        categroynamecontroller.text.isNotEmpty &&
-        categryDescontroller.text.isNotEmpty &&
-        categroynamecontroller.text.length > 12 &&
-        categryDescontroller.text.length > 100;
+        animalNameController.text.isNotEmpty &&
+        animalDescController.text.isNotEmpty &&
+        animalNameController.text.length > 12 &&
+        animalDescController.text.length > 100;
 
     streamController.add(isvalid);
   }
 
   @override
   Widget build(BuildContext context) {
-    final data = ModalRoute.of(context)?.settings.arguments as Map?;
     return MultiBlocProvider(
       providers: [
         BlocProvider.value(value: getIt<CategorycontrollerCubit>()),
-        BlocProvider(create: (BuildContext context) => SingupCubit()),
+        BlocProvider(create: (context) => SingupCubit()),
       ],
       child: Builder(
         builder: (context) {
@@ -100,9 +103,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
             builder: (context, state) {
               log(state.toString());
               if (state is CategorycontrollerEdit) {
-                image = state.category.imagepath;
-                categryDescontroller.text = state.category.description;
-                categroynamecontroller.text = state.category.name;
+                // animalImage = state.animal.imagepath;
+                // animalDescController.text = state.animal.description;
+                // animalNameController.text = state.animal.name;
               }
               bool isasync = false;
               if (state is CategorycontrollerLoading) {
@@ -111,7 +114,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 isasync = false;
               }
               return ModalProgressHUD(
-                inAsyncCall: isasync,
+                inAsyncCall: false,
                 blur: 15,
                 progressIndicator: CupertinoActivityIndicator(
                   radius: 15,
@@ -128,7 +131,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            constantManager.createnewcategory,
+                            constantManager.createnewanimal,
                             style: TextStyle(
                               fontSize: screeutilsManager.s20,
                               color: ColorManger.kprimary,
@@ -188,50 +191,69 @@ class _CategoryScreenState extends State<CategoryScreen> {
                             ],
                           ),
                           SizedBox(height: screeutilsManager.h20),
-                          CategoryField(
+                          AnimalField(
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return constantManager.categorynameh;
+                                return constantManager.animaldeschint;
                               }
                               if (value.length <= 12) {
                                 return "Value must be 12 char";
                               }
                               return null;
                             },
-                            controller: categroynamecontroller,
+                            controller: animalNameController,
                             maxlines: 1,
-                            text: constantManager.categoryname,
-                            hinttext: constantManager.categorynameh,
+                            text: constantManager.AnimalName,
+                            hinttext: constantManager.animalnamehint,
                           ),
                           SizedBox(height: screeutilsManager.h20),
-                          CategoryField(
+                          AnimalField(
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return constantManager.categorydesch;
+                                return constantManager.animaldeschint;
                               }
                               if (value.length < 100) {
                                 return "Value must be More Than char";
                               }
                               return null;
                             },
-                            controller: categryDescontroller,
+                            controller: animalDescController,
                             maxlines: 3,
-                            text: constantManager.categorydesc,
-                            hinttext: constantManager.categorydesch,
+                            text: constantManager.animaldesc,
+                            hinttext: constantManager.animaldeschint,
                           ),
-                          SizedBox(height: screeutilsManager.h16),
+                          SizedBox(height: screeutilsManager.h20),
+                          Builder(
+                            builder: (BuildContext context) => Uploadimage(
+                              edit: state is CategorycontrollerEdit
+                                  ? true
+                                  : false,
+                              onTap: () {
+                                showSignupImageBottomSheet(context);
+                              },
+                            ),
+                          ),
+                          SizedBox(height: screeutilsManager.h20),
+                          AnimalField(
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return constantManager.AnimalPrice;
+                              }
 
-                          Uploadimage(
-                            edit: state is CategorycontrollerEdit
-                                ? true
-                                : false,
-                            onTap: () {
-                              showSignupImageBottomSheet(context);
+                              return null;
                             },
+                            controller: categroynamecontroller,
+                            maxlines: 1,
+                            text: constantManager.AnimalPrice,
+                            hinttext: constantManager.AnimalPricehint,
                           ),
 
                           SizedBox(height: screeutilsManager.h20),
-
+                          CategorytabchoiceCheap(
+                            generateListStringAnimal:
+                                widget.generateListStringAnimal,
+                          ),
+                          SizedBox(height: screeutilsManager.h20),
                           StreamBuilder(
                             initialData: false,
                             stream: streamController.stream,
@@ -239,32 +261,14 @@ class _CategoryScreenState extends State<CategoryScreen> {
                               return Homebutton(
                                 text: state is CategorycontrollerEdit
                                     ? constantManager.edit
-                                    : constantManager.save,
+                                    : constantManager.add,
                                 onPressed: asyncSnapshot.data == true
                                     ? () {
                                         File? image = context
                                             .read<SingupCubit>()
                                             .image;
 
-                                        if (image != null) {
-                                          context
-                                              .read<CategorycontrollerCubit>()
-                                              .createNewCategory(
-                                                Categorymodel(
-                                                  description:
-                                                      categryDescontroller.text,
-                                                  image: image,
-                                                  name: categroynamecontroller
-                                                      .text,
-                                                ),
-                                                state is CategorycontrollerEdit
-                                                    ? true
-                                                    : false,
-                                              );
-                                          context
-                                              .read<CategorycontrollerCubit>()
-                                              .updategetAllCategory();
-                                        }
+                                        if (image != null) {}
                                       }
                                     : null,
                               );
@@ -275,10 +279,10 @@ class _CategoryScreenState extends State<CategoryScreen> {
                               ? Homebutton(
                                   text: constantManager.delete,
                                   onPressed: () {
-                                    log(state.category.id.toString());
-                                    context
-                                        .read<CategorycontrollerCubit>()
-                                        .deleteCategory(state.category.id);
+                                    // log(state.animal.id.toString());
+                                    // context
+                                    //     .read<CategorycontrollerCubit>()
+                                    //     .deleteAnimal(state.animal.id);
                                   },
                                 )
                               : SizedBox.shrink(),
@@ -296,8 +300,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
   }
 }
 
-class CategoryField extends StatelessWidget {
-  CategoryField({
+class AnimalField extends StatelessWidget {
+  AnimalField({
     super.key,
     required this.hinttext,
     required this.text,
@@ -332,6 +336,56 @@ class CategoryField extends StatelessWidget {
           controller: controller,
         ),
       ],
+    );
+  }
+}
+
+class CategorytabchoiceCheap extends StatefulWidget {
+  CategorytabchoiceCheap({super.key, required this.generateListStringAnimal});
+  final List<Category> generateListStringAnimal;
+
+  @override
+  State<CategorytabchoiceCheap> createState() => _CategorytabchoiceCheapState();
+}
+
+class _CategorytabchoiceCheapState extends State<CategorytabchoiceCheap> {
+  @override
+  int curidnex = -1;
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      children: List.generate(
+        widget.generateListStringAnimal.length,
+        (index) => Padding(
+          padding: EdgeInsets.all(5),
+
+          child: InkWell(
+            onTap: () {
+              curidnex = index;
+              setState(() {});
+            },
+            child: ChoiceChip(
+              backgroundColor: curidnex == index
+                  ? ColorManger.kprimary
+                  : ColorManger.white,
+              selectedColor: ColorManger.white,
+              label: Text(
+                widget.generateListStringAnimal[index].name,
+                style: TextStyle(
+                  color: curidnex == index
+                      ? ColorManger.white
+                      : ColorManger.black,
+                ),
+              ),
+              selected: false,
+              onSelected: (value) {
+                curidnex = index;
+                setState(() {});
+              },
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

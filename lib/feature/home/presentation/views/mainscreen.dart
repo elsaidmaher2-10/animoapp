@@ -2,11 +2,15 @@ import 'dart:async';
 import 'package:animoapp/core/DI/getit.dart';
 import 'package:animoapp/core/resource/colormanager.dart';
 import 'package:animoapp/core/resource/constantsmanager.dart';
+import 'package:animoapp/feature/home/data/models/CategorySuccessResponse.dart';
 import 'package:animoapp/feature/home/hometab.dart';
+import 'package:animoapp/feature/home/presentation/manager/cubit/categorycontroller_cubit.dart';
 import 'package:animoapp/feature/home/presentation/views/category.dart';
+import 'package:animoapp/feature/home/presentation/views/widgets/animal.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 GlobalKey<_MainscreenState> mainscreen = GlobalKey();
 
@@ -20,7 +24,7 @@ class Mainscreen extends StatefulWidget {
 class _MainscreenState extends State<Mainscreen> {
   StreamController<int> stream = StreamController.broadcast();
   int curindex = 0;
-
+  List<Category> ofCategory = [];
   List<Widget> get screens => [
     Hometab(
       onTap2: () {
@@ -32,7 +36,7 @@ class _MainscreenState extends State<Mainscreen> {
     ),
     const Center(child: Text("data")),
     const CategoryScreen(),
-    const Center(child: Text("data2")),
+    AnimalScreen(generateListStringAnimal: ofCategory),
     const Center(child: Text("data3")),
   ];
 
@@ -56,6 +60,13 @@ class _MainscreenState extends State<Mainscreen> {
                       instanceName: constantManager.seeAllKey,
                     ).currentState?.popUntil((route) => route.isFirst);
                   }
+                  if (index == 3) {
+                    ofCategory = BlocProvider.of<CategorycontrollerCubit>(
+                      context,
+                      listen: false,
+                    ).ofCategory;
+                  }
+                  print(ofCategory);
                   stream.add(index);
                 },
                 elevation: 0,

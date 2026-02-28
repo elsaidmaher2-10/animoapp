@@ -1,13 +1,3 @@
-// {
-//     "statusCode": 200,
-//     "message": "Login successful",
-//     "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhaG1lZDEyMjcyNzcyN0BnbWFpbC5jb20iLCJpYXQiOjE3NDk1NDQ1OTYsImV4cCI6MTc0OTYzMDk5NiwiaXNzIjoiYW5pbW9vb19hcGkifQ.v1iFaHX1U0nXn_0n9cB_WcJbAsLW898rrlLdr7ICoCU",
-//     "refresh_token": "7adfe0f0-a7b7-485a-a4e5-52a6928505b7",
-//     "user": {
-//         "id": 1,
-//         "first_name": "ahmed",
-//         "last_name": "elsaid",
-//         "email": "ahmed122727727@gmail.com",
 
 import 'package:animoapp/feature/Auth/register/data/models/userResponsemodel.dart';
 

@@ -11,4 +11,9 @@ class Apiconstant {
   static String getAllcategoryendpoint = "/api/allCategories";
   static String updateCategory = "/api/updateCategory";
   static String deleteCategory = "/api/deleteCategory";
+
+  static String addNewAnimal = "/api/addNewAnimal";
+  static String getAllAnimal = "/api/allAnimal";
+  static String updateAnimal = "/api/updateAnimal";
+  static String deleteAnimal = "/api/deleteAnimal";
 }
