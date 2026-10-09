@@ -10,12 +10,12 @@
 [![Dart](https://img.shields.io/badge/Dart-3.9.2+-0175C2?logo=dart&logoColor=white)](https://dart.dev)
 [![State Management](https://img.shields.io/badge/BLoC-9.1.1-blueviolet)](https://bloclibrary.dev)
 [![Architecture](https://img.shields.io/badge/Architecture-Clean%20%2F%20Feature--First-success)](#-architecture-overview)
-[![Interactive Demo](https://img.shields.io/badge/Live_Demo-React_19_Vite-brightgreen?logo=react&logoColor=white)](#-interactive-live-demo)
+[![Interactive Demo](https://img.shields.io/badge/Live_Demo-Open_Showcase-brightgreen?logo=react&logoColor=white)](https://elsaidmaher2-10.github.io/animoapp/)
 [![Platforms](https://img.shields.io/badge/Platforms-Android%20%7C%20iOS%20%7C%20Web-orange)](#-supported-platforms)
 
 <br/>
 
-### 📱 [Explore Live Interactive Demo](#-interactive-live-demo) · 📖 [Architecture](#-architecture-overview) · 🚀 [Quick Start](#-getting-started)
+### 📱 [🚀 Launch Live Interactive Demo](https://elsaidmaher2-10.github.io/animoapp/) · 📖 [Architecture](#-architecture-overview) · 🚀 [Quick Start](#-getting-started)
 
 <br/>
 
@@ -36,6 +36,8 @@ In addition to the Flutter mobile codebase, the repository includes a standalone
 ## 🎮 Interactive Live Demo
 
 Experience the app directly in your browser without compiling Flutter! The included demo faithfully recreates every screen, design token, validation rule, and user journey.
+
+👉 **[🌐 Open Live Demo on GitHub Pages (elsaidmaher2-10.github.io/animoapp)](https://elsaidmaher2-10.github.io/animoapp/)**
 
 <div align="center">
   <img src="./screenshots/02_notification_banner.png" alt="Dynamic Island and Notification Banner" width="850" style="border-radius: 14px;"/>
