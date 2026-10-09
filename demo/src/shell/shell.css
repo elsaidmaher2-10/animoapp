@@ -1,0 +1,237 @@
+/* Shell Layout & Responsive Presentation */
+.demo-container {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  background: radial-gradient(circle at 50% 20%, #152238 0%, #0a0f1d 100%);
+  color: #f1f5f9;
+  font-family: var(--font-poppins);
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  gap: 36px;
+  overflow-x: hidden;
+}
+
+@media (max-width: 980px) {
+  .demo-container {
+    flex-direction: column;
+    padding: 16px;
+    gap: 24px;
+  }
+}
+
+/* Phone Frame Styles */
+.phone-viewport-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.iphone-frame {
+  position: relative;
+  width: 390px;
+  height: 844px;
+  border-radius: 54px;
+  padding: 12px;
+  box-shadow: 
+    0 0 0 1px rgba(255, 255, 255, 0.15) inset,
+    0 25px 60px -15px rgba(0, 0, 0, 0.7),
+    0 0 40px rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Frame Color Variants */
+.iphone-frame.midnight {
+  background: linear-gradient(145deg, #1e2430 0%, #0d1117 100%);
+  border: 4px solid #2d3748;
+}
+
+.iphone-frame.titanium {
+  background: linear-gradient(145deg, #8a8d91 0%, #56585c 100%);
+  border: 4px solid #a0a4a8;
+}
+
+.iphone-frame.starlight {
+  background: linear-gradient(145deg, #e4e2dd 0%, #b8b6b0 100%);
+  border: 4px solid #d4d2cb;
+}
+
+.iphone-frame.purple {
+  background: linear-gradient(145deg, #372847 0%, #1e1329 100%);
+  border: 4px solid #4a385f;
+}
+
+/* Side Buttons */
+.side-button {
+  position: absolute;
+  background: #2a3447;
+  border-radius: 3px;
+  z-index: 1;
+}
+
+.side-button.action {
+  left: -8px;
+  top: 115px;
+  width: 5px;
+  height: 28px;
+}
+
+.side-button.vol-up {
+  left: -8px;
+  top: 155px;
+  width: 5px;
+  height: 52px;
+}
+
+.side-button.vol-down {
+  left: -8px;
+  top: 220px;
+  width: 5px;
+  height: 52px;
+}
+
+.side-button.power {
+  right: -8px;
+  top: 175px;
+  width: 5px;
+  height: 78px;
+}
+
+/* Screen Area */
+.phone-screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  border-radius: 44px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1) inset;
+}
+
+/* Dynamic Island */
+.dynamic-island {
+  position: absolute;
+  top: 11px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #000000;
+  border-radius: 20px;
+  z-index: 990;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  color: #ffffff;
+  transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+.dynamic-island.compact {
+  width: 120px;
+  height: 32px;
+}
+
+.dynamic-island.expanded {
+  width: 340px;
+  height: 72px;
+  padding: 10px 16px;
+  border-radius: 28px;
+}
+
+/* Home Indicator */
+.home-indicator-bar {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 134px;
+  height: 5px;
+  background-color: #000000;
+  opacity: 0.35;
+  border-radius: 100px;
+  z-index: 990;
+  pointer-events: none;
+}
+
+/* Side Control Panel */
+.control-panel {
+  width: 380px;
+  max-width: 100%;
+  background: rgba(18, 25, 41, 0.85);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+.panel-section-title {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #94a3b8;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.chip-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #e2e8f0;
+  padding: 7px 12px;
+  border-radius: 10px;
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.chip-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+
+.chip-btn.active {
+  background: var(--kprimary);
+  border-color: var(--klightgreen);
+  color: #ffffff;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes scaleUp {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}

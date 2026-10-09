@@ -1,0 +1,56 @@
+:root {
+  --kprimary: #04332D;
+  --klightgreen: #16A99F;
+  --kbutton-green: #155F45;
+  --card-bg: #F6F6F6;
+  --lightgrey: #505050;
+  --lightgrey2: #828282;
+  --lightgrey3: #6C6C6C;
+  --lightgrey4: #F6F6F6;
+  --white: #FFFFFF;
+  --red: #FC1B1A;
+  --green: #08A43A;
+  --black: #000000;
+  --text-dark: #1B293B;
+
+  --safe-top: 54px;
+  --safe-bottom: 34px;
+
+  --font-original-surfer: 'Original Surfer', cursive, sans-serif;
+  --font-otama: 'Playfair Display', serif;
+  --font-poppins: 'Poppins', system-ui, -apple-system, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: var(--font-poppins);
+  color: var(--black);
+  background-color: #0b0f19;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom scrollbar for mobile feel */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+}
+
+input, button, textarea, select {
+  font-family: inherit;
+}
